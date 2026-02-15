@@ -1,0 +1,51 @@
+# Rust
+target/
+**/target/
+Cargo.lock.bak
+*.rlib
+*.rmeta
+
+# Node
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.pnp
+.pnp.js
+yarn-error.log
+npm-debug.log*
+.yarn-integrity
+
+# Env and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Anchor
+.anchor/
+test-ledger/
+**/*.so
+
+# Editor and OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.log
+coverage/
+.nyc_output/
+.tsbuildinfo
+*.tsbuildinfo
+
+# Deployment
+.vercel/
+.fly/
