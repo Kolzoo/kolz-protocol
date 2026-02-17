@@ -1,0 +1,22 @@
+* text=auto eol=lf
+
+*.rs text eol=lf
+*.toml text eol=lf
+*.ts text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+
+programs/kolz/idl/**       linguist-generated=true
+sdk/dist/**                linguist-generated=true
+tests/fixtures/**          linguist-vendored=true
+docs/**                    linguist-documentation=true
