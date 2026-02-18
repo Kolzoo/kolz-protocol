@@ -1,0 +1,42 @@
+[workspace]
+members = ["programs/kolz", "cli"]
+resolver = "2"
+
+[workspace.package]
+version = "0.4.1"
+edition = "2021"
+authors = ["KOLZ core"]
+license = "MIT"
+repository = "https://github.com/Kolzoo/kolz-protocol"
+homepage = "https://kolz-api.fly.dev"
+readme = "README.md"
+rust-version = "1.78"
+description = "Solana protocol that binds KOL identities to pump.fun launches, mints 1/1 NFTs, runs a 7-day throne, and distributes trade fees to token holders."
+keywords = ["solana", "anchor", "pump-fun", "memecoin", "defi"]
+categories = ["cryptography", "network-programming"]
+
+[workspace.dependencies]
+anchor-lang = "0.30.1"
+anchor-spl = "0.30.1"
+solana-program = "=1.18.26"
+solana-sdk = "=1.18.26"
+solana-client = "=1.18.26"
+borsh = "1.5"
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+tokio = { version = "1.39", features = ["full"] }
+clap = { version = "4.5", features = ["derive"] }
+mpl-token-metadata = "4.1"
+spl-token = "4.0"
+spl-associated-token-account = "3.0"
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
+opt-level = 3
+
+[profile.release.build-override]
+opt-level = 3
+incremental = false
+codegen-units = 1
