@@ -4,4 +4,6 @@
 //! initializer. Re-export everything flat so callers can write
 //! `use crate::state::Pet;` without naming intermediate modules.
 
+pub mod config;
 
+pub use config::Config;
