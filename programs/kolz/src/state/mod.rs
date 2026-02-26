@@ -5,5 +5,7 @@
 //! `use crate::state::Pet;` without naming intermediate modules.
 
 pub mod config;
+pub mod pet;
 
 pub use config::Config;
+pub use pet::Pet;
