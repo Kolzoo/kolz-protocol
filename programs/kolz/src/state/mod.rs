@@ -6,6 +6,8 @@
 
 pub mod config;
 pub mod pet;
+pub mod launch;
 
 pub use config::Config;
 pub use pet::Pet;
+pub use launch::Launch;
