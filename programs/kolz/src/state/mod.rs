@@ -8,8 +8,10 @@ pub mod config;
 pub mod pet;
 pub mod launch;
 pub mod king;
+pub mod distribution;
 
 pub use config::Config;
 pub use pet::Pet;
 pub use launch::Launch;
 pub use king::KingOfHill;
+pub use distribution::Distribution;
