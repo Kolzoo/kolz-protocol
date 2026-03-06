@@ -5,13 +5,15 @@
 //! `use crate::state::Pet;` without naming intermediate modules.
 
 pub mod config;
-pub mod pet;
-pub mod launch;
-pub mod king;
 pub mod distribution;
+pub mod holder_claim;
+pub mod king;
+pub mod launch;
+pub mod pet;
 
 pub use config::Config;
-pub use pet::Pet;
-pub use launch::Launch;
-pub use king::KingOfHill;
 pub use distribution::Distribution;
+pub use holder_claim::HolderClaim;
+pub use king::KingOfHill;
+pub use launch::Launch;
+pub use pet::Pet;
