@@ -3,6 +3,16 @@
 //! Top-level dispatch module. Every instruction handler lives in its own
 //! file under `instructions/`. Each wrapper here simply forwards to the
 //! handler so the `#[program]` module stays focused on dispatch.
+//!
+//! Protocol summary:
+//!
+//! 1. Admin opens the singleton `Config` PDA and registers an oracle.
+//! 2. Oracle observes a pump.fun launch, binds it to a pet identity.
+//! 3. Oracle mints a 1/1 king-of-hill NFT into a PDA escrow vault.
+//! 4. Memecoin holders take the throne by demonstrating a top balance.
+//! 5. After a fixed window the oracle settles the throne, locking the NFT.
+//! 6. Each epoch the oracle commits a merkle root of holder rewards.
+//! 7. Holders claim against the root, draining lamports from the fee vault.
 
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::result_large_err)]
@@ -23,4 +33,14 @@ declare_id!("Kolz1111111111111111111111111111111111111111");
 #[program]
 pub mod kolz {
     use super::*;
+
+    /// One-shot config bootstrap. Only callable while the Config PDA does
+    /// not yet exist. Signer becomes admin.
+    pub fn init_config(
+        ctx: Context<InitConfig>,
+        oracle_authority: Pubkey,
+        fee_basis_points: u32,
+    ) -> Result<()> {
+        instructions::init_config::handler(ctx, oracle_authority, fee_basis_points)
+    }
 }
