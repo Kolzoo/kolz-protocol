@@ -6,6 +6,8 @@
 
 pub mod init_config;
 pub mod bind_launch;
+pub mod mint_kol_nft;
 
 pub use init_config::*;
 pub use bind_launch::*;
+pub use mint_kol_nft::*;
