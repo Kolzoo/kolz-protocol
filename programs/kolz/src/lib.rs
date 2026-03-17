@@ -26,6 +26,7 @@ pub mod instructions;
 pub mod state;
 pub mod utils;
 
+use crate::constants::KOL_NAME_LEN;
 use crate::instructions::*;
 
 declare_id!("Kolz1111111111111111111111111111111111111111");
@@ -42,5 +43,14 @@ pub mod kolz {
         fee_basis_points: u32,
     ) -> Result<()> {
         instructions::init_config::handler(ctx, oracle_authority, fee_basis_points)
+    }
+
+    /// Oracle-only. Registers a pet for a KOL and the launch state mirror
+    /// of the underlying pump.fun bonding curve.
+    pub fn oracle_bind_pumpfun_launch(
+        ctx: Context<OracleBindPumpfunLaunch>,
+        kol_name: [u8; KOL_NAME_LEN],
+    ) -> Result<()> {
+        instructions::bind_launch::handler(ctx, kol_name)
     }
 }
