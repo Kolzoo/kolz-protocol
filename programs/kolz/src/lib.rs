@@ -53,4 +53,14 @@ pub mod kolz {
     ) -> Result<()> {
         instructions::bind_launch::handler(ctx, kol_name)
     }
+
+    /// Oracle-only. Mints the 1/1 king NFT and creates the king state.
+    pub fn mint_kol_nft(
+        ctx: Context<MintKolNft>,
+        name: String,
+        symbol: String,
+        uri: String,
+    ) -> Result<()> {
+        instructions::mint_kol_nft::handler(ctx, name, symbol, uri)
+    }
 }
