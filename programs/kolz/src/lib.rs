@@ -63,4 +63,10 @@ pub mod kolz {
     ) -> Result<()> {
         instructions::mint_kol_nft::handler(ctx, name, symbol, uri)
     }
+
+    /// Challenger pulls the NFT into their wallet provided they out-hold
+    /// the current champion.
+    pub fn take_throne(ctx: Context<TakeThrone>) -> Result<()> {
+        instructions::take_throne::handler(ctx)
+    }
 }
