@@ -69,4 +69,10 @@ pub mod kolz {
     pub fn take_throne(ctx: Context<TakeThrone>) -> Result<()> {
         instructions::take_throne::handler(ctx)
     }
+
+    /// Oracle-only. Revokes the king PDA delegate once the settlement
+    /// window has elapsed.
+    pub fn settle_throne(ctx: Context<SettleThrone>) -> Result<()> {
+        instructions::settle_throne::handler(ctx)
+    }
 }
