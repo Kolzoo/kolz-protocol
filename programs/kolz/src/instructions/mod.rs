@@ -9,9 +9,11 @@ pub mod bind_launch;
 pub mod mint_kol_nft;
 pub mod take_throne;
 pub mod settle_throne;
+pub mod commit_distribution_root;
 
 pub use init_config::*;
 pub use bind_launch::*;
 pub use mint_kol_nft::*;
 pub use take_throne::*;
 pub use settle_throne::*;
+pub use commit_distribution_root::*;
