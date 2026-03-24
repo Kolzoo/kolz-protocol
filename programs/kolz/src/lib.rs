@@ -75,4 +75,14 @@ pub mod kolz {
     pub fn settle_throne(ctx: Context<SettleThrone>) -> Result<()> {
         instructions::settle_throne::handler(ctx)
     }
+
+    /// Oracle-only. Posts a merkle root over per-holder rewards for an epoch.
+    pub fn commit_distribution_root(
+        ctx: Context<CommitDistributionRoot>,
+        epoch: u64,
+        root: [u8; 32],
+        pool_lamports: u64,
+    ) -> Result<()> {
+        instructions::commit_distribution_root::handler(ctx, epoch, root, pool_lamports)
+    }
 }
