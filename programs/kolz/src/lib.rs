@@ -85,4 +85,14 @@ pub mod kolz {
     ) -> Result<()> {
         instructions::commit_distribution_root::handler(ctx, epoch, root, pool_lamports)
     }
+
+    /// Holder-driven. Verifies a merkle proof and pays out from the vault.
+    pub fn claim_holder_fees(
+        ctx: Context<ClaimHolderFees>,
+        epoch: u64,
+        amount: u64,
+        proof: Vec<[u8; 32]>,
+    ) -> Result<()> {
+        instructions::claim_holder_fees::handler(ctx, epoch, amount, proof)
+    }
 }
