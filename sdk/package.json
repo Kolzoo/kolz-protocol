@@ -1,0 +1,64 @@
+{
+  "name": "@kolz/sdk",
+  "version": "0.1.0",
+  "description": "Official TypeScript SDK for the KOLZ on-chain protocol. Build, sign, and send instructions for KOL pet bonding, King of the Hill NFT capture, and holder fee distribution.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "kolz",
+    "solana",
+    "anchor",
+    "spl",
+    "pumpfun",
+    "memecoin",
+    "kol",
+    "sdk"
+  ],
+  "author": {
+    "name": "Kolzoo",
+    "email": "289228263+Kolzoo@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Kolzoo/kolz-protocol#readme",
+  "bugs": {
+    "url": "https://github.com/Kolzoo/kolz-protocol/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kolzoo/kolz-protocol.git",
+    "directory": "sdk"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@noble/hashes": "^1.4.0",
+    "@solana/spl-token": "^0.4.0",
+    "@solana/web3.js": "^1.95.0",
+    "borsh": "^2.0.0",
+    "bs58": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.0"
+  }
+}
