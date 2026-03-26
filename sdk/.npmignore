@@ -1,0 +1,14 @@
+src/
+test/
+node_modules/
+*.log
+*.tsbuildinfo
+.DS_Store
+tsconfig.json
+jest.config.js
+coverage/
+.github/
+.vscode/
+.idea/
+*.test.ts
+*.spec.ts
