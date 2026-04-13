@@ -4,3 +4,4 @@ export * from "./mint_kol_nft";
 export * from "./take_throne";
 export * from "./settle_throne";
 export * from "./commit_distribution_root";
+export * from "./claim_holder_fees";
