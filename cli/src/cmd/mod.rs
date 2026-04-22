@@ -4,3 +4,4 @@
 //! `main.rs` matches the parsed clap variant to the corresponding `run`
 //! function defined here.
 
+pub mod init;
