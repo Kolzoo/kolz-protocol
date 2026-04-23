@@ -5,3 +5,4 @@
 //! function defined here.
 
 pub mod init;
+pub mod bind;
