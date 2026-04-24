@@ -8,3 +8,4 @@ pub mod init;
 pub mod bind;
 pub mod mint_nft;
 pub mod take_throne;
+pub mod settle;
