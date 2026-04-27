@@ -10,3 +10,4 @@ pub mod mint_nft;
 pub mod take_throne;
 pub mod settle;
 pub mod commit_root;
+pub mod claim;
