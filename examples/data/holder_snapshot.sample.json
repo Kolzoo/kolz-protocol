@@ -1,0 +1,33 @@
+{
+  "epoch": 1,
+  "snapshot_slot": 312456789,
+  "total_pool_lamports": "5000000000",
+  "fee_basis_points": 150,
+  "holders": [
+    {
+      "address": "11111111111111111111111111111111",
+      "balance": "4200000000000",
+      "share_lamports": "2100000000"
+    },
+    {
+      "address": "Sysvar1nstructions1111111111111111111111111",
+      "balance": "1800000000000",
+      "share_lamports": "900000000"
+    },
+    {
+      "address": "SysvarRent111111111111111111111111111111111",
+      "balance": "1200000000000",
+      "share_lamports": "600000000"
+    },
+    {
+      "address": "SysvarC1ock11111111111111111111111111111111",
+      "balance": "1600000000000",
+      "share_lamports": "800000000"
+    },
+    {
+      "address": "SysvarS1otHashes111111111111111111111111111",
+      "balance": "1200000000000",
+      "share_lamports": "600000000"
+    }
+  ]
+}
