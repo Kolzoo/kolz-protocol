@@ -1,0 +1,38 @@
+{
+  "epoch": 1,
+  "merkle_root_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+  "pool_lamports": "5000000000",
+  "committed_at_slot": 312456999,
+  "leaves": [
+    {
+      "address": "11111111111111111111111111111111",
+      "amount": "2100000000",
+      "leaf_index": 0,
+      "proof_hex": []
+    },
+    {
+      "address": "Sysvar1nstructions1111111111111111111111111",
+      "amount": "900000000",
+      "leaf_index": 1,
+      "proof_hex": []
+    },
+    {
+      "address": "SysvarRent111111111111111111111111111111111",
+      "amount": "600000000",
+      "leaf_index": 2,
+      "proof_hex": []
+    },
+    {
+      "address": "SysvarC1ock11111111111111111111111111111111",
+      "amount": "800000000",
+      "leaf_index": 3,
+      "proof_hex": []
+    },
+    {
+      "address": "SysvarS1otHashes111111111111111111111111111",
+      "amount": "600000000",
+      "leaf_index": 4,
+      "proof_hex": []
+    }
+  ]
+}
