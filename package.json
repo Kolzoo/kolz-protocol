@@ -1,0 +1,41 @@
+{
+  "name": "kolz-monorepo",
+  "private": true,
+  "version": "0.4.1",
+  "description": "KOLZ protocol monorepo: Solana on-chain program, TypeScript SDK, Rust CLI, and integration tests.",
+  "workspaces": [
+    "sdk",
+    "tests",
+    "examples"
+  ],
+  "scripts": {
+    "test": "yarn workspace @kolz/sdk test",
+    "build": "yarn workspace @kolz/sdk build"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.16",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.11.0",
+    "chai": "^4.4.1",
+    "mocha": "^10.4.0",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Kolzoo",
+    "email": "289228263+Kolzoo@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/Kolzoo/kolz-protocol#readme",
+  "bugs": {
+    "url": "https://github.com/Kolzoo/kolz-protocol/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kolzoo/kolz-protocol.git",
+    "directory": "."
+  }
+}
