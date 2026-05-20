@@ -1,0 +1,34 @@
+{
+  "name": "KOLZ protocol dev container",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/rust:1": {
+      "version": "1.78",
+      "profile": "default"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": true
+    }
+  },
+  "remoteEnv": {
+    "RUSTFLAGS": "-D warnings",
+    "CARGO_TERM_COLOR": "always"
+  },
+  "postCreateCommand": "rustup component add rustfmt clippy && npm install -g yarn",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "forwardPorts": [8899, 8900],
+  "remoteUser": "vscode"
+}
