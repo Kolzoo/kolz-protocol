@@ -1,3 +1,5 @@
+<img src="./assets/banner.jpg" alt="KOLZ banner" />
+
 # KOLZ
 
 <img src="https://img.shields.io/badge/anchor-0.30.1-blue" alt="anchor version">
