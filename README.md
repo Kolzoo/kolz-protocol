@@ -284,8 +284,9 @@ Support channels: [`.github/SUPPORT.md`](.github/SUPPORT.md).
 
 ## Links
 
-- Website: kolz.fun
-- GitHub: Kolzoo/kolz-protocol
+- Website: [kolz.fun](https://kolz.fun)
+- X: [@kolz_oo](https://x.com/kolz_oo)
+- GitHub: [Kolzoo/kolz-protocol](https://github.com/Kolzoo/kolz-protocol)
 - Ticker: `$KOLZ`
 - Documentation: [`docs/`](docs/)
 
