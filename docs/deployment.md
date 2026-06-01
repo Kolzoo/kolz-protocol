@@ -43,13 +43,29 @@ anchor test --skip-local-validator
 
 ## Devnet
 
+The program is live on devnet.
+
+| Field | Value |
+| --- | --- |
+| Program ID | `9bjyD3Vs6YBUUX5P6Tg2S4JZorbCiC4ZJjpzyQUeDvgJ` |
+| Cluster | `https://api.devnet.solana.com` |
+| Loader | `BPFLoaderUpgradeab1e11111111111111111111111` |
+| Explorer | [solana explorer (devnet)](https://explorer.solana.com/address/9bjyD3Vs6YBUUX5P6Tg2S4JZorbCiC4ZJjpzyQUeDvgJ?cluster=devnet) |
+| Status | end-to-end test suite passing |
+
+Set the program id in your shell profile or the deployment `.env`:
+
+```bash
+export KOLZ_PROGRAM_ID=9bjyD3Vs6YBUUX5P6Tg2S4JZorbCiC4ZJjpzyQUeDvgJ
+```
+
+To redeploy or update the buffer:
+
 ```bash
 solana config set --url https://api.devnet.solana.com
 solana airdrop 5
-anchor deploy --provider.cluster devnet
+anchor deploy --provider.cluster devnet --program-id 9bjyD3Vs6YBUUX5P6Tg2S4JZorbCiC4ZJjpzyQUeDvgJ
 ```
-
-The deploy prints a program id. Save it as `KOLZ_PROGRAM_ID` in your shell profile or the deployment `.env`.
 
 After deploy, initialize the protocol:
 

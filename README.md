@@ -268,8 +268,12 @@ kolz-protocol/
 
 ## Deployments
 
-This repository is the source of the program. Devnet and mainnet program IDs and
-sample explorer links live in [`docs/deployment.md`](docs/deployment.md).
+| Cluster | Program ID | Explorer | Status |
+| --- | --- | --- | --- |
+| devnet | `9bjyD3Vs6YBUUX5P6Tg2S4JZorbCiC4ZJjpzyQUeDvgJ` | [view](https://explorer.solana.com/address/9bjyD3Vs6YBUUX5P6Tg2S4JZorbCiC4ZJjpzyQUeDvgJ?cluster=devnet) | live, end-to-end test suite passing |
+| mainnet-beta | not deployed | n/a | pending |
+
+Build flags, rent math, and deployment runbook in [`docs/deployment.md`](docs/deployment.md).
 
 ## Contributing
 
