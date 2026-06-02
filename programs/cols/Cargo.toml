@@ -1,6 +1,6 @@
 [package]
-name = "kolz"
-description = "KOLZ on-chain program: bonded pumpfun launch, king-of-the-hill NFT, holder fee distribution"
+name = "cols"
+description = "COLS on-chain program: bonded pumpfun launch, king-of-the-hill NFT, holder fee distribution"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -9,7 +9,7 @@ repository.workspace = true
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "kolz"
+name = "cols"
 
 [features]
 default = []

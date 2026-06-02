@@ -84,7 +84,7 @@ pub fn run(cli: &Cli, args: InitArgs, format: OutputFormat) -> CliResult<()> {
 
     render(
         format,
-        "kolz init",
+        "cols init",
         &[
             ("signature", out.signature.clone()),
             ("config_pda", out.config_pda.clone()),

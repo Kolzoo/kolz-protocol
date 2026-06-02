@@ -1,11 +1,11 @@
 import { PublicKey } from "@solana/web3.js";
 
 /**
- * Default program id for the KOLZ on-chain Anchor program.
+ * Default program id for the COLS on-chain Anchor program.
  * The deployed program id is fixed across devnet and mainnet so the SDK
  * ships with this as the default. Callers may override per-client.
  */
-export const KOLZ_PROGRAM_ID: PublicKey = new PublicKey(
+export const COLS_PROGRAM_ID: PublicKey = new PublicKey(
   "KoLZ1111111111111111111111111111111111111111"
 );
 
@@ -32,10 +32,10 @@ export const SYSTEM_PROGRAM_ID: PublicKey = new PublicKey(
 export const NO_CHAMPION: PublicKey = SYSTEM_PROGRAM_ID;
 
 /**
- * KOLZ HTTP API base used for off-chain oracle data and merkle root
+ * COLS HTTP API base used for off-chain oracle data and merkle root
  * publishing. The client only reads from this endpoint, never writes.
  */
-export const KOLZ_API_BASE: string = "https://kolz-api.fly.dev";
+export const COLS_API_BASE: string = "https://cols-api.fly.dev";
 
 /**
  * PDA seed strings. These mirror the on-chain program seeds 1:1.

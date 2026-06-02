@@ -10,7 +10,7 @@ import {
   petPda
 } from "../src/pdas";
 import { encodeKolName } from "../src/util";
-import { KOLZ_PROGRAM_ID } from "../src/constants";
+import { COLS_PROGRAM_ID } from "../src/constants";
 
 function pk(prefix: number): PublicKey {
   const bytes = new Uint8Array(32);
@@ -87,7 +87,7 @@ describe("pdas", () => {
   it("all derivations honor a custom program id", () => {
     const custom = new PublicKey("11111111111111111111111111111111");
     const a = configPda(custom);
-    const b = configPda(KOLZ_PROGRAM_ID);
+    const b = configPda(COLS_PROGRAM_ID);
     expect(a.address.toBase58()).not.toBe(b.address.toBase58());
   });
 });

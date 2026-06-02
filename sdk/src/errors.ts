@@ -30,39 +30,39 @@ export const ERROR_MESSAGES: Record<ErrorCodeName, string> = {
  * Base error class for SDK and on-chain errors. Programmatically
  * distinguishable from generic Error via instanceof.
  */
-export class KolzError extends Error {
+export class ColsError extends Error {
   public readonly code: number | null;
   public readonly codeName: ErrorCodeName | null;
 
   public constructor(message: string, code?: number | null, codeName?: ErrorCodeName | null) {
     super(message);
-    this.name = "KolzError";
+    this.name = "ColsError";
     this.code = code ?? null;
     this.codeName = codeName ?? null;
-    Object.setPrototypeOf(this, KolzError.prototype);
+    Object.setPrototypeOf(this, ColsError.prototype);
   }
 }
 
 /**
  * Error subclass produced when a Solana RPC call returns a program
- * error whose code maps to one of the kolz enum variants. The
+ * error whose code maps to one of the cols enum variants. The
  * original Solana logs are attached as the `logs` field for debugging.
  */
-export class KolzProgramError extends KolzError {
+export class ColsProgramError extends ColsError {
   public readonly logs: string[];
 
   public constructor(codeName: ErrorCodeName, logs: string[] = []) {
     const code = ErrorCode[codeName];
     super(`${codeName}: ${ERROR_MESSAGES[codeName]}`, code, codeName);
-    this.name = "KolzProgramError";
+    this.name = "ColsProgramError";
     this.logs = logs;
-    Object.setPrototypeOf(this, KolzProgramError.prototype);
+    Object.setPrototypeOf(this, ColsProgramError.prototype);
   }
 }
 
 /**
  * Resolve an anchor numeric error code into a human readable enum
- * name, or null if the code is not part of the kolz enum range.
+ * name, or null if the code is not part of the cols enum range.
  */
 export function codeToName(code: number): ErrorCodeName | null {
   const entries = Object.entries(ErrorCode) as Array<[string, number | string]>;
@@ -76,15 +76,15 @@ export function codeToName(code: number): ErrorCodeName | null {
 
 /**
  * Parse Solana transaction logs for an "Error Code: <N>" line, return
- * a KolzProgramError when the code maps to our enum. Otherwise null.
+ * a ColsProgramError when the code maps to our enum. Otherwise null.
  */
-export function parseAnchorErrorLogs(logs: string[]): KolzProgramError | null {
+export function parseAnchorErrorLogs(logs: string[]): ColsProgramError | null {
   for (const line of logs) {
     const match = line.match(/Error Code: (\w+)/);
     if (match) {
       const name = match[1] as ErrorCodeName;
       if (name in ErrorCode) {
-        return new KolzProgramError(name, logs);
+        return new ColsProgramError(name, logs);
       }
     }
     const numMatch = line.match(/custom program error: 0x([0-9a-fA-F]+)/);
@@ -92,7 +92,7 @@ export function parseAnchorErrorLogs(logs: string[]): KolzProgramError | null {
       const code = parseInt(numMatch[1], 16);
       const name = codeToName(code);
       if (name) {
-        return new KolzProgramError(name, logs);
+        return new ColsProgramError(name, logs);
       }
     }
   }
@@ -100,15 +100,15 @@ export function parseAnchorErrorLogs(logs: string[]): KolzProgramError | null {
 }
 
 /**
- * Wrap any thrown value into a KolzError. If the input is already a
- * KolzError it is returned unchanged.
+ * Wrap any thrown value into a ColsError. If the input is already a
+ * ColsError it is returned unchanged.
  */
-export function wrapUnknown(err: unknown): KolzError {
-  if (err instanceof KolzError) {
+export function wrapUnknown(err: unknown): ColsError {
+  if (err instanceof ColsError) {
     return err;
   }
   if (err instanceof Error) {
-    return new KolzError(err.message);
+    return new ColsError(err.message);
   }
-  return new KolzError(String(err));
+  return new ColsError(String(err));
 }

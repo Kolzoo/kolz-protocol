@@ -1,11 +1,11 @@
-# KOLZ TypeScript SDK
+# COLS TypeScript SDK
 
-`@kolz/sdk` is the official TypeScript client for the KOLZ Anchor program. It is compiled with `target: ES2020`, `module: commonjs`, `strict: true`, and re-exports the Anchor-generated IDL types. The SDK exposes one class, `KolzClient`, plus pure helpers for PDA derivation and merkle proof construction.
+`@cols/sdk` is the official TypeScript client for the COLS Anchor program. It is compiled with `target: ES2020`, `module: commonjs`, `strict: true`, and re-exports the Anchor-generated IDL types. The SDK exposes one class, `ColsClient`, plus pure helpers for PDA derivation and merkle proof construction.
 
 ## Install
 
 ```bash
-npm install @kolz/sdk @coral-xyz/anchor @solana/web3.js @solana/spl-token
+npm install @cols/sdk @coral-xyz/anchor @solana/web3.js @solana/spl-token
 ```
 
 ## Constructing the client
@@ -13,17 +13,17 @@ npm install @kolz/sdk @coral-xyz/anchor @solana/web3.js @solana/spl-token
 ```ts
 import { AnchorProvider, Wallet } from "@coral-xyz/anchor";
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
-import { KolzClient } from "@kolz/sdk";
+import { ColsClient } from "@cols/sdk";
 
 const connection = new Connection("https://api.devnet.solana.com", "confirmed");
 const wallet = new Wallet(Keypair.generate());
 const provider = new AnchorProvider(connection, wallet, { commitment: "confirmed" });
 
 const programId = new PublicKey("11111111111111111111111111111111");
-const client = new KolzClient(provider, programId);
+const client = new ColsClient(provider, programId);
 ```
 
-The `programId` argument is the deployed `kolz` program id. Use the deployed value from [deployment.md](./deployment.md). The example above uses the System Program address as a stand-in for documentation purposes only.
+The `programId` argument is the deployed `cols` program id. Use the deployed value from [deployment.md](./deployment.md). The example above uses the System Program address as a stand-in for documentation purposes only.
 
 ## PDA helpers
 
@@ -31,7 +31,7 @@ All PDAs are exposed as pure functions so callers can derive addresses without i
 
 ```ts
 import { findConfigPda, findPetPda, findLaunchPda, findKingPda,
-         findDistributionPda, findHolderClaimPda, findFeeVaultPda } from "@kolz/sdk";
+         findDistributionPda, findHolderClaimPda, findFeeVaultPda } from "@cols/sdk";
 
 const [config]       = findConfigPda(programId);                           // ["config"]
 const [pet]          = findPetPda(programId, kolOwner, kolNameBytes);      // ["pet", kol_owner, kol_name]
@@ -45,7 +45,7 @@ const [feeVault]     = findFeeVaultPda(programId);                         // ["
 `kolNameBytes` must be a 32-byte `Uint8Array`. Use the `encodeKolName` helper to pad a string:
 
 ```ts
-import { encodeKolName } from "@kolz/sdk";
+import { encodeKolName } from "@cols/sdk";
 const kolNameBytes = encodeKolName("vitalik");  // Uint8Array(32)
 ```
 
@@ -82,9 +82,9 @@ const result = await client.oracleBindPumpfunLaunch({
 const minted = await client.mintKolNft({
   oracle: oracleKeypair,          // Signer
   pet: petPubkey,
-  name: "KOLZ Vitalik",           // <= 32 chars
+  name: "COLS Vitalik",           // <= 32 chars
   symbol: "VITA",                 // <= 10 chars
-  uri: "https://kolz-api.fly.dev/metadata/vitalik.json", // <= 200 chars
+  uri: "https://cols-api.fly.dev/metadata/vitalik.json", // <= 200 chars
   payer: payerKeypair,
 });
 ```
@@ -146,7 +146,7 @@ const claim = await client.claimHolderFees({
 Constructing proofs off chain is the caller's responsibility. The SDK ships a reference implementation.
 
 ```ts
-import { buildMerkleTree, getMerkleProof, computeLeaf } from "@kolz/sdk";
+import { buildMerkleTree, getMerkleProof, computeLeaf } from "@cols/sdk";
 
 // leaves: [{ holder: PublicKey, epoch: bigint, amount: bigint }]
 const leaves = [
@@ -184,18 +184,18 @@ const claimed = await client.fetchHolderClaim(holder, epoch);    // HolderClaim 
 
 ## Typed errors
 
-The SDK wraps Anchor error codes into a `KolzError` enum. Catch them with `instanceof`:
+The SDK wraps Anchor error codes into a `ColsError` enum. Catch them with `instanceof`:
 
 ```ts
-import { KolzError, KolzErrorCode } from "@kolz/sdk";
+import { ColsError, ColsErrorCode } from "@cols/sdk";
 
 try {
   await client.takeThrone({ /* ... */ });
 } catch (e) {
-  if (e instanceof KolzError) {
+  if (e instanceof ColsError) {
     switch (e.code) {
-      case KolzErrorCode.NotTopHolder:           // 6003
-      case KolzErrorCode.SettlementPeriodEnded:  // 6004
+      case ColsErrorCode.NotTopHolder:           // 6003
+      case ColsErrorCode.SettlementPeriodEnded:  // 6004
         // surface to UI
         break;
       default:

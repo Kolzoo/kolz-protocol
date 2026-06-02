@@ -25,7 +25,7 @@ import {
 } from "@solana/web3.js";
 
 import {
-  KolzClient,
+  ColsClient,
   findDistributionPda,
   findHolderClaimPda,
   findFeeVaultPda,
@@ -79,10 +79,10 @@ function toHex(bytes: Uint8Array): string {
 }
 
 async function main(): Promise<void> {
-  logHeader("KOLZ example 07: claim_holder_fees");
+  logHeader("COLS example 07: claim_holder_fees");
 
   const env = loadEnv();
-  const client = new KolzClient({
+  const client = new ColsClient({
     connection: env.connection,
     programId: env.programId,
     payer: env.wallet,
@@ -177,7 +177,7 @@ async function main(): Promise<void> {
 
   if (!holderPubkey.equals(claimer)) {
     process.stdout.write(`\nSelected leaf does not match the loaded wallet.\n`);
-    process.stdout.write(`The on-chain instruction requires the holder to sign. Switch KOLZ_WALLET_PATH and rerun.\n`);
+    process.stdout.write(`The on-chain instruction requires the holder to sign. Switch COLS_WALLET_PATH and rerun.\n`);
     return;
   }
 

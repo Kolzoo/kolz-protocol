@@ -1,4 +1,4 @@
-# KOLZ Per-Component Changelog
+# COLS Per-Component Changelog
 
 This file mirrors the root `CHANGELOG.md` split by component. Each section lists changes affecting the corresponding subsystem only. Use this view when you want to know "what changed in the SDK between v0.2 and v0.3" without scanning the full project log.
 
@@ -8,7 +8,7 @@ The version scheme is semver across all components. A bump in any component bump
 
 ### 0.1.0
 
-- Initial release of the `kolz` Anchor program.
+- Initial release of the `cols` Anchor program.
 - Pinned `anchor = "0.30.1"`, `solana-program = "=1.18.26"`, `rust edition = "2021"`.
 - Implemented 7 instructions: `init_config`, `oracle_bind_pumpfun_launch`, `mint_kol_nft`, `take_throne`, `settle_throne`, `commit_distribution_root`, `claim_holder_fees`.
 - State accounts: `Config`, `Pet`, `Launch`, `KingOfHill`, `Distribution`, `HolderClaim`.
@@ -20,20 +20,20 @@ The version scheme is semver across all components. A bump in any component bump
 
 ### 0.1.0
 
-- Initial release of `@kolz/sdk`.
+- Initial release of `@cols/sdk`.
 - Compiled with `target: ES2020`, `module: commonjs`, `strict: true`.
-- `KolzClient` class wrapping all 7 instructions.
+- `ColsClient` class wrapping all 7 instructions.
 - PDA derivation helpers: `findConfigPda`, `findPetPda`, `findLaunchPda`, `findKingPda`, `findDistributionPda`, `findHolderClaimPda`, `findFeeVaultPda`.
 - Merkle helpers: `buildMerkleTree`, `getMerkleProof`, `computeLeaf`.
 - `encodeKolName` for `[u8; 32]` padding.
-- Typed error wrapper `KolzError` with `KolzErrorCode` enum.
+- Typed error wrapper `ColsError` with `ColsErrorCode` enum.
 - Account fetchers with `null` on miss.
 
 ## CLI
 
 ### 0.1.0
 
-- Initial release of the `kolz` Rust CLI.
+- Initial release of the `cols` Rust CLI.
 - Subcommands: `config init|show`, `launch bind|show`, `nft mint`, `throne take|settle|show`, `distribution commit|show`, `claim build|submit`, `vault show|fund`.
 - Global flags: `--rpc-url`, `--keypair`, `--program-id`, `--commitment`, `--json`.
 - Reads `~/.config/solana/cli/config.yml` for defaults.
@@ -59,4 +59,4 @@ The version scheme is semver across all components. A bump in any component bump
 ## See also
 
 - Root project changelog at `CHANGELOG.md` in the repository root.
-- Release tags at `https://github.com/Kolzoo/kolz-protocol/releases`.
+- Release tags at `https://github.com/Kolzoo/cols-protocol/releases`.

@@ -17,7 +17,7 @@ use mpl_token_metadata::types::DataV2;
 use crate::constants::{
     CONFIG_SEED, KING_ESCROW_SEED, KING_SEED, LAUNCH_SEED, NFT_DECIMALS, NFT_SUPPLY, PET_SEED,
 };
-use crate::errors::KolzError;
+use crate::errors::ColsError;
 use crate::events::KingMinted;
 use crate::state::{Config, KingOfHill, Launch, Pet};
 use crate::utils::check_metadata_lengths;
@@ -32,7 +32,7 @@ pub struct MintKolNft<'info> {
     #[account(
         seeds = [CONFIG_SEED],
         bump = config.bump,
-        constraint = config.oracle == oracle.key() @ KolzError::OracleMismatch,
+        constraint = config.oracle == oracle.key() @ ColsError::OracleMismatch,
     )]
     pub config: Account<'info, Config>,
 
@@ -48,7 +48,7 @@ pub struct MintKolNft<'info> {
     #[account(
         seeds = [LAUNCH_SEED, pet.key().as_ref()],
         bump = launch.bump,
-        constraint = launch.pet == pet.key() @ KolzError::PetMismatch,
+        constraint = launch.pet == pet.key() @ ColsError::PetMismatch,
     )]
     pub launch: Account<'info, Launch>,
 
@@ -115,7 +115,7 @@ pub fn handler(
     // Defensive: the launch must have been bonded to a real mint already.
     require!(
         ctx.accounts.launch.pump_mint != Pubkey::default(),
-        KolzError::BondingCurveNotInitialized
+        ColsError::BondingCurveNotInitialized
     );
 
     let pet_key = ctx.accounts.pet.key();
@@ -187,7 +187,7 @@ pub fn handler(
 
     let slot = Clock::get()?.slot;
     msg!(
-        "kolz: king minted pet={} mint={} name={} symbol={}",
+        "cols: king minted pet={} mint={} name={} symbol={}",
         pet_key,
         ctx.accounts.nft_mint.key(),
         name,

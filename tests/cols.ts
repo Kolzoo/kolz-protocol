@@ -29,7 +29,7 @@ import {
 } from "./utils/setup";
 import { loadProgram, programIdFromIdl, loadIdl, asBn } from "./utils/program";
 
-describe("kolz end-to-end happy path", () => {
+describe("cols end-to-end happy path", () => {
   const provider = buildProvider();
   const connection = provider.connection;
   const program = loadProgram(provider);
@@ -152,7 +152,7 @@ describe("kolz end-to-end happy path", () => {
     );
 
     await program.methods
-      .mintKolNft("KOLZ Crown", "KOLZ", "https://kolz-api.fly.dev/nft/metadata.json")
+      .mintKolNft("COLS Crown", "COLS", "https://cols-api.fly.dev/nft/metadata.json")
       .accounts({
         config: configPda,
         oracle: oracle.publicKey,

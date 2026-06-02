@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a defect in KOLZ
+about: Report a defect in COLS
 title: 'bug: '
 labels: bug
 assignees: ''
@@ -27,7 +27,7 @@ or program logs when possible.
 
 ## Environment
 
-- KOLZ commit SHA:
+- COLS commit SHA:
 - Solana CLI version:
 - Anchor version:
 - Operating system:

@@ -30,7 +30,7 @@ export function accountDiscriminator(structName: string): Uint8Array {
 }
 
 /**
- * Pre-computed instruction discriminators for the kolz program.
+ * Pre-computed instruction discriminators for the cols program.
  * Computed eagerly so callers do not pay the hash cost per ix build.
  */
 export const IX_DISCRIMINATORS = {
@@ -75,7 +75,7 @@ export function matchAccountDiscriminator(
 }
 
 /**
- * Identify which kolz account variant a raw buffer corresponds to,
+ * Identify which cols account variant a raw buffer corresponds to,
  * or null if the discriminator does not match any known struct.
  */
 export function classifyAccount(buf: Uint8Array): keyof typeof ACCOUNT_DISCRIMINATORS | null {

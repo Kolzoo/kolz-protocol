@@ -157,7 +157,7 @@ pub fn run(cli: &Cli, args: TakeThroneArgs, format: OutputFormat) -> CliResult<(
 
     render(
         format,
-        "kolz take-throne",
+        "cols take-throne",
         &[
             ("signature", out.signature.clone()),
             ("challenger", out.challenger.clone()),

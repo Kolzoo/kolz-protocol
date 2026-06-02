@@ -15,7 +15,7 @@ import { BorshWriter } from "../borsh";
 import { IX_DISCRIMINATORS } from "../discriminators";
 import { kingOfHillPda, nftEscrowVaultPda, petPda } from "../pdas";
 import {
-  KOLZ_PROGRAM_ID,
+  COLS_PROGRAM_ID,
   MAX_NFT_NAME_BYTES,
   MAX_NFT_SYMBOL_BYTES,
   MAX_NFT_URI_BYTES,
@@ -80,7 +80,7 @@ function deriveMasterEditionPda(mint: PublicKey): PublicKey {
  * account is being initialized fresh).
  */
 export function buildMintKolNftIx(args: MintKolNftArgs): MintKolNftBuildResult {
-  const programId = args.programId ?? KOLZ_PROGRAM_ID;
+  const programId = args.programId ?? COLS_PROGRAM_ID;
 
   const nameBytes = Buffer.from(args.name, "utf8");
   if (nameBytes.length > MAX_NFT_NAME_BYTES) {

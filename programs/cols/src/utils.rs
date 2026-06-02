@@ -9,14 +9,14 @@ use anchor_lang::solana_program::keccak;
 
 use crate::constants::{KOL_NAME_LEN, MAX_FEE_BPS, MAX_METADATA_NAME_LEN,
     MAX_METADATA_SYMBOL_LEN, MAX_METADATA_URI_LEN};
-use crate::errors::KolzError;
+use crate::errors::ColsError;
 
 /// Encode an arbitrary input string into a fixed-width `[u8; KOL_NAME_LEN]`
 /// buffer. The trailing bytes are zero-padded. Returns `NameTooLong` when the
 /// input exceeds the budget.
 pub fn pack_kol_name(input: &[u8]) -> Result<[u8; KOL_NAME_LEN]> {
     if input.len() > KOL_NAME_LEN {
-        return err!(KolzError::NameTooLong);
+        return err!(ColsError::NameTooLong);
     }
     let mut out = [0u8; KOL_NAME_LEN];
     out[..input.len()].copy_from_slice(input);
@@ -26,13 +26,13 @@ pub fn pack_kol_name(input: &[u8]) -> Result<[u8; KOL_NAME_LEN]> {
 /// Reject metaplex metadata strings that exceed protocol-side limits.
 pub fn check_metadata_lengths(name: &str, symbol: &str, uri: &str) -> Result<()> {
     if name.as_bytes().len() > MAX_METADATA_NAME_LEN {
-        return err!(KolzError::NameTooLong);
+        return err!(ColsError::NameTooLong);
     }
     if symbol.as_bytes().len() > MAX_METADATA_SYMBOL_LEN {
-        return err!(KolzError::SymbolTooLong);
+        return err!(ColsError::SymbolTooLong);
     }
     if uri.as_bytes().len() > MAX_METADATA_URI_LEN {
-        return err!(KolzError::UriTooLong);
+        return err!(ColsError::UriTooLong);
     }
     Ok(())
 }
@@ -40,7 +40,7 @@ pub fn check_metadata_lengths(name: &str, symbol: &str, uri: &str) -> Result<()>
 /// Reject obviously bogus fee basis points.
 pub fn check_fee_bps(bps: u32) -> Result<()> {
     if bps > MAX_FEE_BPS {
-        return err!(KolzError::FeeBpsOutOfRange);
+        return err!(ColsError::FeeBpsOutOfRange);
     }
     Ok(())
 }

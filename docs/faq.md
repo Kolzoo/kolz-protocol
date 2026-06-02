@@ -1,12 +1,12 @@
-# KOLZ FAQ
+# COLS FAQ
 
-Common questions about the KOLZ protocol, organized by audience.
+Common questions about the COLS protocol, organized by audience.
 
 ## For holders
 
 ### How do I capture the throne?
 
-Buy enough of the KOL's pump.fun memecoin to hold strictly more than the current `champion_balance` shown on the launch page, then call `take_throne`. The TypeScript SDK exposes `client.takeThrone(...)`; the Rust CLI exposes `kolz throne take`. See [throne.md](./throne.md).
+Buy enough of the KOL's pump.fun memecoin to hold strictly more than the current `champion_balance` shown on the launch page, then call `take_throne`. The TypeScript SDK exposes `client.takeThrone(...)`; the Rust CLI exposes `cols throne take`. See [throne.md](./throne.md).
 
 ### What happens if I sell after capturing?
 
@@ -18,7 +18,7 @@ About 7 days from the first capture. The exact deadline is `first_capture_slot +
 
 ### How do I claim my fee distribution?
 
-The oracle publishes per-epoch allocations at `https://kolz-api.fly.dev`. Fetch your proof, then call `claim_holder_fees`. The SDK exposes `client.claimHolderFees(...)`; the CLI exposes `kolz claim build` and `kolz claim submit`. See [distributions.md](./distributions.md).
+The oracle publishes per-epoch allocations at `https://cols-api.fly.dev`. Fetch your proof, then call `claim_holder_fees`. The SDK exposes `client.claimHolderFees(...)`; the CLI exposes `cols claim build` and `cols claim submit`. See [distributions.md](./distributions.md).
 
 ### Can I claim more than once per epoch?
 
@@ -26,13 +26,13 @@ No. The `HolderClaim` PDA is keyed by `(holder, epoch)` and `init` blocks duplic
 
 ### What if the fee_vault is empty?
 
-`claim_holder_fees` fails with `InsufficientVault`. Retry after the vault is funded. Vault funding is permissionless via `kolz vault fund`, so a KOL or community member can top it up.
+`claim_holder_fees` fails with `InsufficientVault`. Retry after the vault is funded. Vault funding is permissionless via `cols vault fund`, so a KOL or community member can top it up.
 
 ## For KOLs
 
 ### How do I get a launch bound?
 
-Launches are bound by the oracle, not by the KOL directly. The KOL or an integrator submits the mint to the KOLZ public API. The oracle verifies the launch is real and calls `oracle_bind_pumpfun_launch`.
+Launches are bound by the oracle, not by the KOL directly. The KOL or an integrator submits the mint to the COLS public API. The oracle verifies the launch is real and calls `oracle_bind_pumpfun_launch`.
 
 ### Do I have to give up creator fees?
 
@@ -64,11 +64,11 @@ Subscribe to Solana program logs for the program id. The Rust CLI emits structur
 
 ### Is there a public RPC?
 
-No. KOLZ runs on the standard Solana RPC. Use any production-grade Solana RPC provider with `KOLZ_RPC_URL`.
+No. COLS runs on the standard Solana RPC. Use any production-grade Solana RPC provider with `COLS_RPC_URL`.
 
 ### Where is the IDL?
 
-Generated at `target/idl/kolz.json` after `anchor build`. The same IDL is bundled in `@kolz/sdk`.
+Generated at `target/idl/cols.json` after `anchor build`. The same IDL is bundled in `@cols/sdk`.
 
 ### Can I use a custom merkle library?
 
@@ -80,7 +80,7 @@ Yes, as long as it matches the on-chain verifier byte for byte:
 
 See [distributions.md](./distributions.md) for the reference implementation.
 
-### Does KOLZ support non-pump.fun launches?
+### Does COLS support non-pump.fun launches?
 
 Not in v1. The bonding curve observation logic is pump.fun specific.
 
@@ -88,7 +88,7 @@ Not in v1. The bonding curve observation logic is pump.fun specific.
 
 ### Is there a bug bounty?
 
-Coordination details are in the repository at `https://github.com/Kolzoo/kolz-protocol`. See SECURITY.md in the repo root for disclosure process.
+Coordination details are in the repository at `https://github.com/Kolzoo/cols-protocol`. See SECURITY.md in the repo root for disclosure process.
 
 ### What is in scope?
 

@@ -1,19 +1,19 @@
-# @kolz/sdk
+# @cols/sdk
 
-<img src="https://img.shields.io/npm/v/@kolz/sdk?style=flat-square" alt="npm version" />
-<img src="https://img.shields.io/node/v/@kolz/sdk?style=flat-square" alt="node version" />
+<img src="https://img.shields.io/npm/v/@cols/sdk?style=flat-square" alt="npm version" />
+<img src="https://img.shields.io/node/v/@cols/sdk?style=flat-square" alt="node version" />
 <img src="https://img.shields.io/badge/solana-1.18.26-blue?style=flat-square" alt="solana" />
 <img src="https://img.shields.io/badge/anchor-0.30.1-purple?style=flat-square" alt="anchor" />
 <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="license" />
 
-Official TypeScript SDK for the KOLZ on-chain protocol. KOLZ is a Solana Anchor program that bonds KOL identities to pump.fun memecoin launches, runs a King of the Hill capture loop on a 1/1 NFT, and distributes pooled creator fees to holders via merkle drops.
+Official TypeScript SDK for the COLS on-chain protocol. COLS is a Solana Anchor program that bonds KOL identities to pump.fun memecoin launches, runs a King of the Hill capture loop on a 1/1 NFT, and distributes pooled creator fees to holders via merkle drops.
 
 This package gives you typed wrappers for every program instruction, on-chain account decoders, PDA derivations, and a keccak256 merkle tree implementation that matches the on-chain verifier byte-for-byte.
 
 ## Install
 
 ```bash
-npm install @kolz/sdk @solana/web3.js
+npm install @cols/sdk @solana/web3.js
 ```
 
 Peer requirements:
@@ -26,10 +26,10 @@ Peer requirements:
 
 ```ts
 import { Connection, Keypair, Transaction } from "@solana/web3.js";
-import { KolzClient, encodeKolName } from "@kolz/sdk";
+import { ColsClient, encodeKolName } from "@cols/sdk";
 
 const connection = new Connection("https://api.devnet.solana.com", "confirmed");
-const client = new KolzClient(connection);
+const client = new ColsClient(connection);
 
 const admin = Keypair.generate();
 const oracle = Keypair.generate();
@@ -79,8 +79,8 @@ if (config) {
 ### PDA helpers
 
 ```ts
-import { configPda, petPda, kingOfHillPda, distributionPda } from "@kolz/sdk";
-import { encodeKolName } from "@kolz/sdk";
+import { configPda, petPda, kingOfHillPda, distributionPda } from "@cols/sdk";
+import { encodeKolName } from "@cols/sdk";
 
 const { address: pet } = petPda(kolOwner, encodeKolName("doge"));
 const { address: king } = kingOfHillPda(pet);
@@ -92,7 +92,7 @@ const { address: dist } = distributionPda(epoch);
 The merkle tree hashes leaves as `keccak256(holder_pubkey || epoch_u64_le || amount_u64_le)` and combines internal nodes by lexicographically sorting siblings before hashing. The on-chain verifier follows the same rule, so the proofs you build off-chain plug directly into `claim_holder_fees`.
 
 ```ts
-import { buildMerkleTree, makeLeaf } from "@kolz/sdk";
+import { buildMerkleTree, makeLeaf } from "@cols/sdk";
 
 const leaves = holders.map((h) => makeLeaf(h.address, epoch, h.amount));
 const { root, proofs } = buildMerkleTree(leaves);
@@ -114,10 +114,10 @@ const claimIx = client.buildClaimHolderFees({
 
 ### Error mapping
 
-Anchor program errors are mapped back to a typed `KolzProgramError` with the original enum name attached:
+Anchor program errors are mapped back to a typed `ColsProgramError` with the original enum name attached:
 
 ```ts
-import { parseAnchorErrorLogs } from "@kolz/sdk";
+import { parseAnchorErrorLogs } from "@cols/sdk";
 
 try {
   await connection.sendTransaction(tx, [signer]);
@@ -131,7 +131,7 @@ try {
 
 ## On-chain program reference
 
-The Anchor program lives at [github.com/Kolzoo/kolz-protocol](https://github.com/Kolzoo/kolz-protocol). The HTTP indexer used for off-chain reads runs at `https://kolz-api.fly.dev`.
+The Anchor program lives at [github.com/Kolzoo/cols-protocol](https://github.com/Kolzoo/cols-protocol). The HTTP indexer used for off-chain reads runs at `https://cols-api.fly.dev`.
 
 Pinned toolchain versions:
 

@@ -15,7 +15,7 @@
  * The example loads or generates Alice and Bob keypairs and assumes they hold
  * the appropriate memecoin balances (which the oracle has snapshotted into
  * the launch state). For local devnet experiments, generated balances are
- * stubbed in via KOLZ_ALICE_BAL / KOLZ_BOB_BAL.
+ * stubbed in via COLS_ALICE_BAL / COLS_BOB_BAL.
  */
 
 import {
@@ -26,7 +26,7 @@ import {
 } from "@solana/web3.js";
 
 import {
-  KolzClient,
+  ColsClient,
   encodeKolName,
   findPetPda,
   findKingPda,
@@ -55,18 +55,18 @@ function loadChallenger(envKey: string, fallback: Keypair): Keypair {
 }
 
 async function main(): Promise<void> {
-  logHeader("KOLZ example 04: take_throne (Alice -> Bob)");
+  logHeader("COLS example 04: take_throne (Alice -> Bob)");
 
   const env = loadEnv();
-  const client = new KolzClient({
+  const client = new ColsClient({
     connection: env.connection,
     programId: env.programId,
     payer: env.wallet,
   });
 
-  const kolNameBytes = encodeKolName(process.env.KOLZ_KOL_NAME ?? DEFAULT_KOL_NAME);
-  const kolOwner: PublicKey = process.env.KOLZ_KOL_OWNER
-    ? new PublicKey(process.env.KOLZ_KOL_OWNER)
+  const kolNameBytes = encodeKolName(process.env.COLS_KOL_NAME ?? DEFAULT_KOL_NAME);
+  const kolOwner: PublicKey = process.env.COLS_KOL_OWNER
+    ? new PublicKey(process.env.COLS_KOL_OWNER)
     : Keypair.generate().publicKey;
 
   const [petPda] = findPetPda(env.programId, kolOwner, kolNameBytes);
@@ -84,8 +84,8 @@ async function main(): Promise<void> {
     throw new Error("Throne already settled. take_throne would revert.");
   }
 
-  const alice = loadChallenger("KOLZ_ALICE_SECRET", Keypair.generate());
-  const bob = loadChallenger("KOLZ_BOB_SECRET", Keypair.generate());
+  const alice = loadChallenger("COLS_ALICE_SECRET", Keypair.generate());
+  const bob = loadChallenger("COLS_BOB_SECRET", Keypair.generate());
 
   process.stdout.write(`pet           ${petPda.toBase58()}\n`);
   process.stdout.write(`king          ${kingPda.toBase58()}\n`);
@@ -97,8 +97,8 @@ async function main(): Promise<void> {
   await airdropIfNeeded(env, alice.publicKey, 0.5);
   await airdropIfNeeded(env, bob.publicKey, 0.5);
 
-  const aliceBal = BigInt(process.env.KOLZ_ALICE_BAL ?? DEFAULT_ALICE_BAL.toString());
-  const bobBal = BigInt(process.env.KOLZ_BOB_BAL ?? DEFAULT_BOB_BAL.toString());
+  const aliceBal = BigInt(process.env.COLS_ALICE_BAL ?? DEFAULT_ALICE_BAL.toString());
+  const bobBal = BigInt(process.env.COLS_BOB_BAL ?? DEFAULT_BOB_BAL.toString());
 
   if (aliceBal <= king.championBalance) {
     throw new Error(

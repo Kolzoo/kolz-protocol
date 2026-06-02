@@ -116,7 +116,7 @@ describe("throne flipping and rejection", () => {
     );
 
     await program.methods
-      .mintKolNft("KOLZ Crown", "KOLZ", "https://kolz-api.fly.dev/nft/metadata.json")
+      .mintKolNft("COLS Crown", "COLS", "https://cols-api.fly.dev/nft/metadata.json")
       .accounts({
         config: configPda,
         oracle: oracle.publicKey,

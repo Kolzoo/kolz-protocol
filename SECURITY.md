@@ -8,7 +8,7 @@ only when a critical issue is reported.
 ## Reporting a Vulnerability
 
 Please open a private security advisory on the GitHub repository
-at `https://github.com/Kolzoo/kolz-protocol`. Use the "Report a vulnerability"
+at `https://github.com/Kolzoo/cols-protocol`. Use the "Report a vulnerability"
 button under the Security tab. Do not file public issues for security
 defects.
 
@@ -26,14 +26,14 @@ within thirty days for high severity issues.
 
 In scope:
 
-- The on-chain Anchor program under `programs/kolz`.
+- The on-chain Anchor program under `programs/cols`.
 - The TypeScript SDK under `sdk`.
 - The Rust CLI under `cli`.
 - The off-chain oracle reference implementation.
 
 Out of scope:
 
-- Issues in third party dependencies that do not affect KOLZ usage.
+- Issues in third party dependencies that do not affect COLS usage.
 - Denial of service through normal Solana network rate limits.
 - Social engineering attacks against contributors.
 

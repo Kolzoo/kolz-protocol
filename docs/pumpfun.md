@@ -1,6 +1,6 @@
 # pump.fun Integration
 
-KOLZ does not launch tokens itself. It binds an existing pump.fun bonding curve to a KOL identity and uses the resulting mint as the input for the throne game. This document explains where the boundary lives between the pump.fun program and the `kolz` program, what the oracle is responsible for observing, and how creator fees flow into the holder distribution path.
+COLS does not launch tokens itself. It binds an existing pump.fun bonding curve to a KOL identity and uses the resulting mint as the input for the throne game. This document explains where the boundary lives between the pump.fun program and the `cols` program, what the oracle is responsible for observing, and how creator fees flow into the holder distribution path.
 
 ## Boundary
 
@@ -11,7 +11,7 @@ pump.fun owns:
 - The graduation to a Raydium liquidity pool when the curve fills.
 - The creator fee accrual when graduation completes.
 
-KOLZ owns:
+COLS owns:
 
 - The `Launch` PDA that mirrors a snapshot of curve state.
 - The `KingOfHill` game over the mint.
@@ -35,13 +35,13 @@ The oracle subscribes to pump.fun program logs and the Geyser account stream. Fo
 
 ## Why no CPI in v1
 
-A direct CPI to pump.fun would tightly couple `kolz` to pump.fun's program id and account layout. pump.fun has historically iterated on its bonding curve implementation. Coupling forces a `kolz` redeploy every time pump.fun ships a breaking change.
+A direct CPI to pump.fun would tightly couple `cols` to pump.fun's program id and account layout. pump.fun has historically iterated on its bonding curve implementation. Coupling forces a `cols` redeploy every time pump.fun ships a breaking change.
 
 Trade-off: the oracle becomes a trust point for launch state accuracy. See [security.md](./security.md) section T1.
 
 ## Creator fee handoff
 
-When a pump.fun curve graduates, accumulated creator fees are released to the launch creator's wallet. The KOLZ oracle:
+When a pump.fun curve graduates, accumulated creator fees are released to the launch creator's wallet. The COLS oracle:
 
 1. Watches for the graduation event for any bound launch.
 2. Computes the holder snapshot at the graduation slot.
@@ -69,7 +69,7 @@ The `take_throne` instruction reads the challenger's pump mint balance directly 
 | Wrong mint bound at `oracle_bind_pumpfun_launch` | Throne game runs over a non-existent or unrelated token. `take_throne` would still validate signatures and PDAs, but no holders would have meaningful balances. |
 | Oracle misses graduation event          | No distribution committed. Holders receive nothing until the oracle catches up. |
 | pump.fun program upgrade breaks layout  | Oracle reads return junk for `real_sol_reserve` etc. The mirrored fields go stale; the throne game is unaffected since it does not depend on them. |
-| Creator skips pump.fun and launches direct on Raydium | Out of scope for v1. KOLZ only supports pump.fun launches. |
+| Creator skips pump.fun and launches direct on Raydium | Out of scope for v1. COLS only supports pump.fun launches. |
 
 ## Front-end implications
 

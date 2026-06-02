@@ -1,12 +1,12 @@
 import { Connection, Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
-import { KolzClient } from "../src/client";
+import { ColsClient } from "../src/client";
 import {
   IX_DISCRIMINATORS,
   ACCOUNT_DISCRIMINATORS
 } from "../src/discriminators";
 import { encodeKolName, decodeKolName, solToLamports, lamportsToSol } from "../src/util";
 import { BorshReader, BorshWriter } from "../src/borsh";
-import { KolzError, KolzProgramError, codeToName, parseAnchorErrorLogs } from "../src/errors";
+import { ColsError, ColsProgramError, codeToName, parseAnchorErrorLogs } from "../src/errors";
 import { ErrorCode } from "../src/types";
 import { decodeConfig } from "../src/decoder";
 import { NO_CHAMPION } from "../src/constants";
@@ -25,37 +25,37 @@ function mockConnection(): Connection {
   return stub as unknown as Connection;
 }
 
-describe("KolzClient", () => {
+describe("ColsClient", () => {
   it("uses default program id when not provided", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     expect(c.programId).toBeInstanceOf(PublicKey);
     expect(c.configAddress().address).toBeInstanceOf(PublicKey);
   });
 
   it("predicts settle slot at 1_512_000 ahead", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     expect(c.predictSettleSlot(0n)).toBe(1_512_000n);
     expect(c.predictSettleSlot(1000n)).toBe(1_513_000n);
   });
 
   it("exposes NO_CHAMPION sentinel", () => {
-    expect(KolzClient.noChampion().toBase58()).toBe(NO_CHAMPION.toBase58());
+    expect(ColsClient.noChampion().toBase58()).toBe(NO_CHAMPION.toBase58());
   });
 
   it("fetchConfig returns null when account is missing", async () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     expect(await c.fetchConfig()).toBeNull();
   });
 
   it("getCurrentSlot returns bigint", async () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     const s = await c.getCurrentSlot();
     expect(typeof s).toBe("bigint");
     expect(s).toBe(123456n);
   });
 
   it("builds init_config with correct discriminator prefix", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     const ix = c.buildInitConfig({
       admin: pk(1),
       oracleAuthority: pk(2),
@@ -70,7 +70,7 @@ describe("KolzClient", () => {
   });
 
   it("rejects fee_basis_points out of range", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     expect(() =>
       c.buildInitConfig({ admin: pk(1), oracleAuthority: pk(2), feeBasisPoints: -1 })
     ).toThrow();
@@ -80,7 +80,7 @@ describe("KolzClient", () => {
   });
 
   it("builds bind_launch with 7 accounts", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     const ix = c.buildBindLaunch({
       oracle: pk(1),
       kolOwner: pk(2),
@@ -92,7 +92,7 @@ describe("KolzClient", () => {
   });
 
   it("builds take_throne with first-capture sentinels", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     const ix = c.buildTakeThrone({
       challenger: pk(1),
       kolOwner: pk(2),
@@ -107,7 +107,7 @@ describe("KolzClient", () => {
   });
 
   it("rejects take_throne with champion but no prev ATAs", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     expect(() =>
       c.buildTakeThrone({
         challenger: pk(1),
@@ -121,7 +121,7 @@ describe("KolzClient", () => {
   });
 
   it("builds settle_throne with 7 accounts", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     const ix = c.buildSettleThrone({
       oracle: pk(1),
       kolOwner: pk(2),
@@ -134,7 +134,7 @@ describe("KolzClient", () => {
   });
 
   it("builds commit_distribution_root and rejects bad input", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     const root = new Uint8Array(32);
     root[0] = 7;
     const ix = c.buildCommitDistributionRoot({
@@ -163,7 +163,7 @@ describe("KolzClient", () => {
   });
 
   it("builds claim_holder_fees with proof bytes", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     const ix = c.buildClaimHolderFees({
       holder: pk(1),
       epoch: 5n,
@@ -175,14 +175,14 @@ describe("KolzClient", () => {
   });
 
   it("builds mint_kol_nft and returns escrow ATA", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     const mintKp = Keypair.generate();
     const result = c.buildMintKolNft({
       oracle: pk(1),
       kolOwner: pk(2),
       kolName: "kol",
       nftMint: mintKp,
-      name: "Kolz NFT",
+      name: "Cols NFT",
       symbol: "KZ",
       uri: "https://example.invalid/n.json"
     });
@@ -193,7 +193,7 @@ describe("KolzClient", () => {
   });
 
   it("rejects mint_kol_nft with oversized strings", () => {
-    const c = new KolzClient(mockConnection());
+    const c = new ColsClient(mockConnection());
     expect(() =>
       c.buildMintKolNft({
         oracle: pk(1),
@@ -209,7 +209,7 @@ describe("KolzClient", () => {
 
   it("invokes onInstructionBuilt hook", () => {
     const seen: string[] = [];
-    const c = new KolzClient(mockConnection(), {
+    const c = new ColsClient(mockConnection(), {
       hooks: { onInstructionBuilt: (n) => seen.push(n) }
     });
     c.buildInitConfig({ admin: pk(1), oracleAuthority: pk(2), feeBasisPoints: 0 });
@@ -283,7 +283,7 @@ describe("errors", () => {
       "Program log: Error Code: NotTopHolder",
       "Program log: Error Number: 6003"
     ]);
-    expect(err).toBeInstanceOf(KolzProgramError);
+    expect(err).toBeInstanceOf(ColsProgramError);
     expect(err?.code).toBe(ErrorCode.NotTopHolder);
   });
 
@@ -291,13 +291,13 @@ describe("errors", () => {
     const err = parseAnchorErrorLogs([
       `Program failed: custom program error: 0x${(6010).toString(16)}`
     ]);
-    expect(err).toBeInstanceOf(KolzProgramError);
+    expect(err).toBeInstanceOf(ColsProgramError);
     expect(err?.codeName).toBe("InvalidProof");
   });
 
-  it("KolzError is distinguishable via instanceof", () => {
-    const e = new KolzError("boom");
-    expect(e).toBeInstanceOf(KolzError);
+  it("ColsError is distinguishable via instanceof", () => {
+    const e = new ColsError("boom");
+    expect(e).toBeInstanceOf(ColsError);
     expect(e).toBeInstanceOf(Error);
   });
 });

@@ -1,15 +1,15 @@
-# KOLZ Architecture
+# COLS Architecture
 
-KOLZ is a Solana program that binds a KOL identity (a "pet") to a pump.fun memecoin launch, then runs an on-chain "king of the hill" game over the resulting token. Holders periodically receive distributions of creator fees through a merkle-rooted claim flow. This document describes how the on-chain program, the off-chain oracle, the TypeScript SDK, and the Rust CLI fit together.
+COLS is a Solana program that binds a KOL identity (a "pet") to a pump.fun memecoin launch, then runs an on-chain "king of the hill" game over the resulting token. Holders periodically receive distributions of creator fees through a merkle-rooted claim flow. This document describes how the on-chain program, the off-chain oracle, the TypeScript SDK, and the Rust CLI fit together.
 
 ## Components
 
 The system has four layers.
 
-1. **On-chain program (`kolz`)**: An Anchor 0.30.1 program pinned to `solana-program = "=1.18.26"`. It owns the canonical state: `Config`, `Pet`, `Launch`, `KingOfHill`, `Distribution`, `HolderClaim`. All economic actions (take throne, settle, claim) are gated through it.
+1. **On-chain program (`cols`)**: An Anchor 0.30.1 program pinned to `solana-program = "=1.18.26"`. It owns the canonical state: `Config`, `Pet`, `Launch`, `KingOfHill`, `Distribution`, `HolderClaim`. All economic actions (take throne, settle, claim) are gated through it.
 2. **Oracle service**: An off-chain signer that watches pump.fun bonding curve state. The oracle is the only signer allowed to call `oracle_bind_pumpfun_launch`, `mint_kol_nft`, `settle_throne`, and `commit_distribution_root`. Its pubkey is set at `init_config` time.
-3. **TypeScript SDK (`@kolz/sdk`)**: A thin wrapper around the Anchor IDL. It exposes typed methods for each instruction, computes PDAs, and surfaces typed errors. See [client.md](./client.md).
-4. **Rust CLI (`kolz`)**: A command line tool that wraps the SDK transport and the program's RPC surface for operators. See [cli.md](./cli.md).
+3. **TypeScript SDK (`@cols/sdk`)**: A thin wrapper around the Anchor IDL. It exposes typed methods for each instruction, computes PDAs, and surfaces typed errors. See [client.md](./client.md).
+4. **Rust CLI (`cols`)**: A command line tool that wraps the SDK transport and the program's RPC surface for operators. See [cli.md](./cli.md).
 
 ## High level diagram
 

@@ -1,4 +1,4 @@
-//! kolz: command line client for the KOLZ on-chain program.
+//! cols: command line client for the COLS on-chain program.
 //!
 //! Every subcommand is implemented in `src/cmd/*.rs` and dispatched from the
 //! `run` function below. Global flags such as the RPC endpoint, keypair
@@ -24,8 +24,8 @@ use crate::rpc::{commitment_level_from_str, Cli};
 
 #[derive(Parser, Debug)]
 #[command(
-    name = "kolz",
-    about = "Command line client for the KOLZ on-chain program",
+    name = "cols",
+    about = "Command line client for the COLS on-chain program",
     version,
     long_about = None
 )]
@@ -38,7 +38,7 @@ struct Root {
     #[arg(long, global = true, default_value_os_t = default_keypair_path())]
     keypair: PathBuf,
 
-    /// kolz program id. Defaults to the published mainnet id.
+    /// cols program id. Defaults to the published mainnet id.
     #[arg(long = "program-id", global = true, default_value = rpc::DEFAULT_PROGRAM_ID)]
     program_id: String,
 

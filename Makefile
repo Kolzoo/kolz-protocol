@@ -1,7 +1,7 @@
 .PHONY: build test lint format clean deploy-localnet deploy-devnet sdk-build sdk-test cli-build help
 
 help:
-	@echo "KOLZ protocol build targets"
+	@echo "COLS protocol build targets"
 	@echo "  build              Build anchor program and Rust CLI"
 	@echo "  test               Run Rust tests and TypeScript SDK tests"
 	@echo "  lint               Run cargo clippy across the workspace"
@@ -15,7 +15,7 @@ help:
 
 build:
 	anchor build
-	cargo build --release -p kolz-cli
+	cargo build --release -p cols-cli
 
 test:
 	cargo test --workspace
@@ -44,7 +44,7 @@ sdk-test:
 	cd sdk && yarn test
 
 cli-build:
-	cargo build --release -p kolz-cli
+	cargo build --release -p cols-cli
 
 deploy-localnet:
 	anchor deploy --provider.cluster localnet

@@ -1,14 +1,14 @@
 [workspace]
-members = ["programs/kolz", "cli"]
+members = ["programs/cols", "cli"]
 resolver = "2"
 
 [workspace.package]
 version = "0.4.1"
 edition = "2021"
-authors = ["KOLZ core"]
+authors = ["COLS core"]
 license = "MIT"
-repository = "https://github.com/Kolzoo/kolz-protocol"
-homepage = "https://kolz-api.fly.dev"
+repository = "https://github.com/Kolzoo/cols-protocol"
+homepage = "https://cols-api.fly.dev"
 readme = "README.md"
 rust-version = "1.78"
 description = "Solana protocol that binds KOL identities to pump.fun launches, mints 1/1 NFTs, runs a 7-day throne, and distributes trade fees to token holders."

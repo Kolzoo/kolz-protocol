@@ -1,6 +1,6 @@
-//! In-process integration test for the KOLZ Anchor program.
+//! In-process integration test for the COLS Anchor program.
 //!
-//! Boots a `solana-program-test` bank, registers the compiled `kolz`
+//! Boots a `solana-program-test` bank, registers the compiled `cols`
 //! program, and walks through the bind, take, and settle path. Slot warps
 //! are used to simulate the seven day settlement window deterministically.
 
@@ -17,10 +17,10 @@ use solana_sdk::{
     transaction::Transaction,
 };
 
-const KOLZ_PROGRAM_ID_STR: &str = "KLZooaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+const COLS_PROGRAM_ID_STR: &str = "KLZooaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
-fn kolz_program_id() -> Pubkey {
-    Pubkey::from_str(KOLZ_PROGRAM_ID_STR).unwrap_or_else(|_| Pubkey::new_unique())
+fn cols_program_id() -> Pubkey {
+    Pubkey::from_str(COLS_PROGRAM_ID_STR).unwrap_or_else(|_| Pubkey::new_unique())
 }
 
 fn config_pda(program_id: &Pubkey) -> (Pubkey, u8) {
@@ -66,8 +66,8 @@ fn pad_kol_name(name: &str) -> [u8; 32] {
 }
 
 fn build_program_test() -> ProgramTest {
-    let program_id = kolz_program_id();
-    let mut pt = ProgramTest::new("kolz", program_id, None);
+    let program_id = cols_program_id();
+    let mut pt = ProgramTest::new("cols", program_id, None);
     pt.set_compute_max_units(1_400_000);
     pt
 }
@@ -122,7 +122,7 @@ fn encode_commit_distribution(epoch: u64, root: &[u8; 32], pool: u64) -> Vec<u8>
 
 #[tokio::test]
 async fn pdas_are_deterministic() {
-    let program_id = kolz_program_id();
+    let program_id = cols_program_id();
     let owner = Pubkey::new_unique();
     let name = pad_kol_name("kol_one");
     let (pet, bump_a) = pet_pda(&program_id, &owner, &name);
@@ -141,7 +141,7 @@ async fn pdas_are_deterministic() {
 
 #[tokio::test]
 async fn distribution_seed_uses_epoch_le_bytes() {
-    let program_id = kolz_program_id();
+    let program_id = cols_program_id();
     let (a, _) = distribution_pda(&program_id, 42);
     let (b, _) = distribution_pda(&program_id, 43);
     assert_ne!(a, b, "different epochs must produce different PDAs");
@@ -166,7 +166,7 @@ async fn pad_kol_name_pads_with_zero() {
 
 #[tokio::test]
 async fn fee_vault_pda_is_program_owned_seed() {
-    let program_id = kolz_program_id();
+    let program_id = cols_program_id();
     let (vault_a, _) = fee_vault_pda(&program_id);
     let (vault_b, _) = fee_vault_pda(&program_id);
     assert_eq!(vault_a, vault_b, "fee vault PDA must be deterministic");
@@ -197,7 +197,7 @@ async fn init_config_serializes_arguments() {
 
 #[tokio::test]
 async fn bind_launch_serializes_kol_name() {
-    let name = pad_kol_name("kolz_alice");
+    let name = pad_kol_name("cols_alice");
     let data = encode_bind_launch(&name);
     assert_eq!(data.len(), 8 + 32, "bind payload size mismatch");
     assert_eq!(&data[8..40], &name[..], "kol name bytes must be serialized verbatim");
@@ -247,13 +247,13 @@ async fn program_test_boots_with_funded_payer() {
 
 #[tokio::test]
 async fn bind_take_settle_constructs_instructions() {
-    let program_id = kolz_program_id();
+    let program_id = cols_program_id();
     let oracle = Keypair::new();
     let kol_owner = Keypair::new();
     let challenger = Keypair::new();
     let pump_mint = Pubkey::new_unique();
 
-    let kol_name = pad_kol_name("kolz_bob");
+    let kol_name = pad_kol_name("cols_bob");
     let (config, _) = config_pda(&program_id);
     let (pet, _) = pet_pda(&program_id, &kol_owner.pubkey(), &kol_name);
     let (launch, _) = launch_pda(&program_id, &pet);

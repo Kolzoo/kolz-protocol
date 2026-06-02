@@ -5,8 +5,8 @@ import {
   TransactionInstruction
 } from "@solana/web3.js";
 import {
-  KOLZ_API_BASE,
-  KOLZ_PROGRAM_ID,
+  COLS_API_BASE,
+  COLS_PROGRAM_ID,
   NO_CHAMPION,
   SETTLEMENT_WINDOW_SLOTS
 } from "./constants";
@@ -42,7 +42,7 @@ import {
   decodeDistribution,
   decodeHolderClaim,
   decodeKingOfHill,
-  decodeKolzAccount,
+  decodeColsAccount,
   decodeLaunch,
   decodePet,
   DecodedAccount,
@@ -53,29 +53,29 @@ import {
   DistributionAccount,
   HolderClaimAccount,
   KingOfHillAccount,
-  KolzAccount,
-  KolzClientOptions,
+  ColsAccount,
+  ColsClientOptions,
   LaunchAccount,
   PetAccount
 } from "./types";
 import { encodeKolName } from "./util";
-import { KolzError } from "./errors";
+import { ColsError } from "./errors";
 
 /**
  * High level entry point. Each method returns a TransactionInstruction
  * (or a small bundle of them) ready for the caller to add to a
  * VersionedTransaction or legacy Transaction. The client never signs.
  */
-export class KolzClient {
+export class ColsClient {
   public readonly connection: Connection;
   public readonly programId: PublicKey;
   public readonly apiBase: string;
-  private readonly hooks: KolzClientOptions["hooks"];
+  private readonly hooks: ColsClientOptions["hooks"];
 
-  public constructor(connection: Connection, options: KolzClientOptions = {}) {
+  public constructor(connection: Connection, options: ColsClientOptions = {}) {
     this.connection = connection;
-    this.programId = options.programId ?? KOLZ_PROGRAM_ID;
-    this.apiBase = options.apiBase ?? KOLZ_API_BASE;
+    this.programId = options.programId ?? COLS_PROGRAM_ID;
+    this.apiBase = options.apiBase ?? COLS_API_BASE;
     this.hooks = options.hooks;
   }
 
@@ -297,16 +297,16 @@ export class KolzClient {
   }
 
   /**
-   * Generic account loader. Decodes whichever kolz state variant the
+   * Generic account loader. Decodes whichever cols state variant the
    * account holds.
    */
   public async fetchAccount(
     address: PublicKey,
     commitment?: Commitment
-  ): Promise<KolzAccount | null> {
+  ): Promise<ColsAccount | null> {
     const info = await this.connection.getAccountInfo(address, commitment);
     if (!info) return null;
-    return decodeKolzAccount(info.data);
+    return decodeColsAccount(info.data);
   }
 
   /**
@@ -333,7 +333,7 @@ export class KolzClient {
   public async getCurrentSlot(commitment?: Commitment): Promise<bigint> {
     const slot = await this.connection.getSlot(commitment);
     if (!Number.isSafeInteger(slot)) {
-      throw new KolzError(`getCurrentSlot: returned non-safe integer ${slot}`);
+      throw new ColsError(`getCurrentSlot: returned non-safe integer ${slot}`);
     }
     return BigInt(slot);
   }

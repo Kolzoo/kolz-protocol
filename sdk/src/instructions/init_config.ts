@@ -7,7 +7,7 @@ import {
 import { BorshWriter } from "../borsh";
 import { IX_DISCRIMINATORS } from "../discriminators";
 import { configPda } from "../pdas";
-import { KOLZ_PROGRAM_ID } from "../constants";
+import { COLS_PROGRAM_ID } from "../constants";
 
 /**
  * Arguments to build an init_config instruction.
@@ -29,7 +29,7 @@ export interface InitConfigArgs {
  *   2. system program      []
  */
 export function buildInitConfigIx(args: InitConfigArgs): TransactionInstruction {
-  const programId = args.programId ?? KOLZ_PROGRAM_ID;
+  const programId = args.programId ?? COLS_PROGRAM_ID;
   const { address: config } = configPda(programId);
 
   if (args.feeBasisPoints < 0 || args.feeBasisPoints > 10_000) {

@@ -1,4 +1,4 @@
-//! State account definitions for the KOLZ program.
+//! State account definitions for the COLS program.
 //!
 //! Each submodule wraps a single `#[account]` struct plus its size and
 //! initializer. Re-export everything flat so callers can write

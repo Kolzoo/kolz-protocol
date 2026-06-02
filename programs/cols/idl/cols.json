@@ -1,13 +1,13 @@
 {
   "version": "0.1.0",
-  "name": "kolz",
+  "name": "cols",
   "metadata": {
-    "name": "kolz",
+    "name": "cols",
     "version": "0.1.0",
     "spec": "0.1.0",
-    "description": "KOLZ on-chain program: bonded pumpfun launch, king-of-hill NFT, holder fee distribution"
+    "description": "COLS on-chain program: bonded pumpfun launch, king-of-hill NFT, holder fee distribution"
   },
-  "address": "Kolz1111111111111111111111111111111111111111",
+  "address": "Cols1111111111111111111111111111111111111111",
   "instructions": [
     {
       "name": "initConfig",

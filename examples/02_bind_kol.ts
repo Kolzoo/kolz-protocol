@@ -23,7 +23,7 @@ import {
 } from "@solana/web3.js";
 
 import {
-  KolzClient,
+  ColsClient,
   encodeKolName,
   findConfigPda,
   findPetPda,
@@ -43,10 +43,10 @@ import {
 const DEFAULT_KOL_NAME = "satoshi-of-pumpfun";
 
 async function main(): Promise<void> {
-  logHeader("KOLZ example 02: bind KOL to pump.fun launch");
+  logHeader("COLS example 02: bind KOL to pump.fun launch");
 
   const env = loadEnv();
-  const client = new KolzClient({
+  const client = new ColsClient({
     connection: env.connection,
     programId: env.programId,
     payer: env.oracle,
@@ -62,18 +62,18 @@ async function main(): Promise<void> {
     );
   }
 
-  const kolNameStr = process.env.KOLZ_KOL_NAME ?? DEFAULT_KOL_NAME;
+  const kolNameStr = process.env.COLS_KOL_NAME ?? DEFAULT_KOL_NAME;
   const kolNameBytes = encodeKolName(kolNameStr);
   if (kolNameBytes.length !== 32) {
     throw new Error("encodeKolName must return exactly 32 bytes");
   }
 
-  const kolOwnerRaw = process.env.KOLZ_KOL_OWNER;
+  const kolOwnerRaw = process.env.COLS_KOL_OWNER;
   const kolOwner: PublicKey = kolOwnerRaw
     ? new PublicKey(kolOwnerRaw)
     : Keypair.generate().publicKey;
 
-  const pumpMintRaw = process.env.KOLZ_PUMP_MINT;
+  const pumpMintRaw = process.env.COLS_PUMP_MINT;
   const pumpMint: PublicKey = pumpMintRaw
     ? new PublicKey(pumpMintRaw)
     : Keypair.generate().publicKey;

@@ -1,4 +1,4 @@
-//! Domain-specific error codes returned by KOLZ instructions.
+//! Domain-specific error codes returned by COLS instructions.
 //!
 //! These map one-to-one with the matrix called out in the protocol spec. Each
 //! variant carries a human-readable message that surfaces in the Anchor client
@@ -8,7 +8,7 @@
 use anchor_lang::prelude::*;
 
 #[error_code]
-pub enum KolzError {
+pub enum ColsError {
     #[msg("signer does not match the expected authority")]
     Unauthorized = 6000,
 

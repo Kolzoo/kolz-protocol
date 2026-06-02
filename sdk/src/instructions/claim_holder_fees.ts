@@ -7,7 +7,7 @@ import {
 import { BorshWriter } from "../borsh";
 import { IX_DISCRIMINATORS } from "../discriminators";
 import { distributionPda, feeVaultPda, holderClaimPda } from "../pdas";
-import { KOLZ_PROGRAM_ID } from "../constants";
+import { COLS_PROGRAM_ID } from "../constants";
 
 /**
  * Arguments to claim a single holder's slice of an epoch.
@@ -33,7 +33,7 @@ export interface ClaimHolderFeesArgs {
 export function buildClaimHolderFeesIx(
   args: ClaimHolderFeesArgs
 ): TransactionInstruction {
-  const programId = args.programId ?? KOLZ_PROGRAM_ID;
+  const programId = args.programId ?? COLS_PROGRAM_ID;
   if (args.amount <= 0n) {
     throw new Error("buildClaimHolderFeesIx: amount must be positive");
   }

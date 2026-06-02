@@ -24,7 +24,7 @@ import {
 } from "@solana/web3.js";
 
 import {
-  KolzClient,
+  ColsClient,
   findDistributionPda,
   fetchConfig,
   fetchDistribution,
@@ -77,10 +77,10 @@ function toHex(bytes: Uint8Array): string {
 }
 
 async function main(): Promise<void> {
-  logHeader("KOLZ example 06: commit_distribution_root");
+  logHeader("COLS example 06: commit_distribution_root");
 
   const env = loadEnv();
-  const client = new KolzClient({
+  const client = new ColsClient({
     connection: env.connection,
     programId: env.programId,
     payer: env.oracle,

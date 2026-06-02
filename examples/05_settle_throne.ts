@@ -23,7 +23,7 @@ import {
 } from "@solana/web3.js";
 
 import {
-  KolzClient,
+  ColsClient,
   encodeKolName,
   findPetPda,
   findKingPda,
@@ -41,10 +41,10 @@ import {
 const DEFAULT_KOL_NAME = "satoshi-of-pumpfun";
 
 async function main(): Promise<void> {
-  logHeader("KOLZ example 05: settle_throne");
+  logHeader("COLS example 05: settle_throne");
 
   const env = loadEnv();
-  const client = new KolzClient({
+  const client = new ColsClient({
     connection: env.connection,
     programId: env.programId,
     payer: env.oracle,
@@ -58,9 +58,9 @@ async function main(): Promise<void> {
     throw new Error("Signer is not the configured oracle authority");
   }
 
-  const kolNameBytes = encodeKolName(process.env.KOLZ_KOL_NAME ?? DEFAULT_KOL_NAME);
-  const kolOwner: PublicKey = process.env.KOLZ_KOL_OWNER
-    ? new PublicKey(process.env.KOLZ_KOL_OWNER)
+  const kolNameBytes = encodeKolName(process.env.COLS_KOL_NAME ?? DEFAULT_KOL_NAME);
+  const kolOwner: PublicKey = process.env.COLS_KOL_OWNER
+    ? new PublicKey(process.env.COLS_KOL_OWNER)
     : Keypair.generate().publicKey;
 
   const [petPda] = findPetPda(env.programId, kolOwner, kolNameBytes);

@@ -14,9 +14,9 @@ export function loadIdl(): Idl {
     "..",
     "..",
     "programs",
-    "kolz",
+    "cols",
     "idl",
-    "kolz.json"
+    "cols.json"
   );
   if (!fs.existsSync(idlPath)) {
     return synthesizeIdl();
@@ -42,7 +42,7 @@ export function programIdFromIdl(idl: Idl): PublicKey {
 export function synthesizeIdl(): Idl {
   return {
     version: "0.1.0",
-    name: "kolz",
+    name: "cols",
     instructions: [
       {
         name: "initConfig",

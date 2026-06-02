@@ -7,7 +7,7 @@
 use anchor_lang::prelude::*;
 
 use crate::constants::{CONFIG_SEED, KOL_NAME_LEN, LAUNCH_SEED, PET_SEED};
-use crate::errors::KolzError;
+use crate::errors::ColsError;
 use crate::events::LaunchBound;
 use crate::state::{Config, Launch, Pet};
 
@@ -50,7 +50,7 @@ pub struct OracleBindPumpfunLaunch<'info> {
     #[account(
         seeds = [CONFIG_SEED],
         bump = config.bump,
-        constraint = config.oracle == oracle.key() @ KolzError::OracleMismatch,
+        constraint = config.oracle == oracle.key() @ ColsError::OracleMismatch,
     )]
     pub config: Account<'info, Config>,
 
@@ -82,9 +82,9 @@ pub fn handler(
         require_keys_eq!(
             pet.owner,
             ctx.accounts.kol_owner.key(),
-            KolzError::Unauthorized
+            ColsError::Unauthorized
         );
-        require!(pet.kol_name == kol_name, KolzError::NameTooLong);
+        require!(pet.kol_name == kol_name, ColsError::NameTooLong);
     }
 
     if launch.pet == Pubkey::default() {
@@ -95,20 +95,20 @@ pub fn handler(
             ctx.bumps.launch,
         );
     } else {
-        require_keys_eq!(launch.pet, pet.key(), KolzError::PetMismatch);
+        require_keys_eq!(launch.pet, pet.key(), ColsError::PetMismatch);
         // If the launch already exists, only allow refreshing the bonded slot
         // when the same mint is bound, otherwise the oracle is rebinding to a
         // new mint which is not part of the spec.
         require_keys_eq!(
             launch.pump_mint,
             ctx.accounts.pump_mint.key(),
-            KolzError::MintMismatch
+            ColsError::MintMismatch
         );
         launch.bonded_slot = slot;
     }
 
     msg!(
-        "kolz: pet+launch bound pet={} mint={} slot={}",
+        "cols: pet+launch bound pet={} mint={} slot={}",
         pet.key(),
         ctx.accounts.pump_mint.key(),
         slot,

@@ -1,6 +1,6 @@
-# KOLZ Instruction Reference
+# COLS Instruction Reference
 
-This document specifies every instruction in the `kolz` Anchor program: required accounts, arguments, errors, and runtime behavior. The program is pinned to `anchor = "0.30.1"` and `solana-program = "=1.18.26"`.
+This document specifies every instruction in the `cols` Anchor program: required accounts, arguments, errors, and runtime behavior. The program is pinned to `anchor = "0.30.1"` and `solana-program = "=1.18.26"`.
 
 ## Conventions
 
@@ -130,10 +130,10 @@ Mint the 1/1 KOL NFT and create the `KingOfHill` PDA.
 ### Behavior
 
 ```rust
-require_keys_eq!(ctx.accounts.oracle.key(), ctx.accounts.config.oracle, KolzError::OracleMismatch);
-require!(name.len() <= 32, KolzError::NameTooLong);
-require!(symbol.len() <= 10, KolzError::SymbolTooLong);
-require!(uri.len() <= 200, KolzError::UriTooLong);
+require_keys_eq!(ctx.accounts.oracle.key(), ctx.accounts.config.oracle, ColsError::OracleMismatch);
+require!(name.len() <= 32, ColsError::NameTooLong);
+require!(symbol.len() <= 10, ColsError::SymbolTooLong);
+require!(uri.len() <= 200, ColsError::UriTooLong);
 
 let king = &mut ctx.accounts.king;
 king.pet = ctx.accounts.pet.key();
@@ -189,10 +189,10 @@ None.
 ### Behavior
 
 ```rust
-require!(!king.settled, KolzError::SettlementPeriodEnded);
+require!(!king.settled, ColsError::SettlementPeriodEnded);
 
 let balance = ctx.accounts.challenger_pump_ata.amount;
-require!(balance > king.champion_balance, KolzError::NotTopHolder);
+require!(balance > king.champion_balance, ColsError::NotTopHolder);
 
 let slot = Clock::get()?.slot;
 
@@ -204,7 +204,7 @@ if king.take_overs == 0 {
     // Subsequent capture: move from prev champion ATA to challenger via king delegate.
     let prev = ctx.accounts.prev_champion_nft_ata
         .as_ref()
-        .ok_or(KolzError::MissingPrevChampionAta)?;
+        .ok_or(ColsError::MissingPrevChampionAta)?;
     transfer_checked(/* from prev, authority king PDA */, 1, 0)?;
 }
 
@@ -242,10 +242,10 @@ None.
 ### Behavior
 
 ```rust
-require_keys_eq!(ctx.accounts.oracle.key(), ctx.accounts.config.oracle, KolzError::OracleMismatch);
-require!(!king.settled, KolzError::AlreadySettled);
+require_keys_eq!(ctx.accounts.oracle.key(), ctx.accounts.config.oracle, ColsError::OracleMismatch);
+require!(!king.settled, ColsError::AlreadySettled);
 let slot = Clock::get()?.slot;
-require!(slot >= king.settles_at_slot, KolzError::SettlementNotReady);
+require!(slot >= king.settles_at_slot, ColsError::SettlementNotReady);
 
 // Revoke king PDA delegate from current champion ATA.
 revoke(/* authority = king PDA */)?;
@@ -282,7 +282,7 @@ Publish a merkle root that authorizes holder claims for an epoch.
 ### Behavior
 
 ```rust
-require_keys_eq!(ctx.accounts.oracle.key(), ctx.accounts.config.oracle, KolzError::OracleMismatch);
+require_keys_eq!(ctx.accounts.oracle.key(), ctx.accounts.config.oracle, ColsError::OracleMismatch);
 
 let d = &mut ctx.accounts.distribution;
 d.epoch = epoch;
@@ -322,9 +322,9 @@ Claim lamports allocated to a holder for an epoch.
 
 ```rust
 let leaf = keccak256(holder.key().as_ref(), &epoch.to_le_bytes(), &amount.to_le_bytes());
-require!(verify_merkle_proof(&proof, distribution.root, leaf), KolzError::InvalidProof);
-require!(amount > 0, KolzError::InvalidAmount);
-require!(fee_vault.lamports() >= amount, KolzError::InsufficientVault);
+require!(verify_merkle_proof(&proof, distribution.root, leaf), ColsError::InvalidProof);
+require!(amount > 0, ColsError::InvalidAmount);
+require!(fee_vault.lamports() >= amount, ColsError::InsufficientVault);
 
 // Transfer lamports from fee_vault PDA to holder.
 **fee_vault.to_account_info().try_borrow_mut_lamports()? -= amount;
@@ -337,7 +337,7 @@ holder_claim.claimed_at_slot = Clock::get()?.slot;
 holder_claim.bump = ctx.bumps.holder_claim;
 ```
 
-The `holder_claim` PDA being created via `init` is what enforces single-claim semantics: a second call collides with an existing account and Anchor returns `AlreadyClaimed`-equivalent rent allocation failure. The program explicitly maps that path to `KolzError::AlreadyClaimed`.
+The `holder_claim` PDA being created via `init` is what enforces single-claim semantics: a second call collides with an existing account and Anchor returns `AlreadyClaimed`-equivalent rent allocation failure. The program explicitly maps that path to `ColsError::AlreadyClaimed`.
 
 ### Errors
 

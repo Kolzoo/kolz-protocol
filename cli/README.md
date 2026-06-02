@@ -1,4 +1,4 @@
-# KOLZ CLI
+# COLS CLI
 
 <p>
   <img src="https://img.shields.io/badge/rust-2021-orange" alt="rust edition" />
@@ -7,16 +7,16 @@
   <img src="https://img.shields.io/badge/license-MIT-green" alt="license" />
 </p>
 
-`kolz` is the official command line client for the KOLZ on-chain program. It
+`cols` is the official command line client for the COLS on-chain program. It
 wraps every instruction defined in the Anchor IDL and provides helpers for
 local state inspection, vanity mint grinding, and oracle automation.
 
 The binary targets Solana mainnet, devnet, and any local validator that
-exposes a standard JSON RPC endpoint. The on-chain program is the `kolz`
+exposes a standard JSON RPC endpoint. The on-chain program is the `cols`
 Anchor crate published at
-[github.com/Kolzoo/kolz-protocol](https://github.com/Kolzoo/kolz-protocol).
+[github.com/Kolzoo/cols-protocol](https://github.com/Kolzoo/cols-protocol).
 Oracle services are operated through the public API at
-[kolz-api.fly.dev](https://kolz-api.fly.dev).
+[cols-api.fly.dev](https://cols-api.fly.dev).
 
 ## Install
 
@@ -24,7 +24,7 @@ Oracle services are operated through the public API at
 cargo install --path .
 ```
 
-This places a single binary named `kolz` on your `PATH`.
+This places a single binary named `cols` on your `PATH`.
 
 ## Configuration
 
@@ -45,7 +45,7 @@ Every subcommand accepts the following global flags:
 Initialize the global `Config` PDA. Must be signed by the future admin.
 
 ```
-kolz init --oracle <PUBKEY> --fee-bps 100
+cols init --oracle <PUBKEY> --fee-bps 100
 ```
 
 ### bind
@@ -54,7 +54,7 @@ Bind a pump.fun launch to a KOL pet. The signer must be the oracle authority
 declared during `init`.
 
 ```
-kolz bind --kol-owner <PUBKEY> --pump-mint <PUBKEY> --kol-name "satoshi"
+cols bind --kol-owner <PUBKEY> --pump-mint <PUBKEY> --kol-name "satoshi"
 ```
 
 ### mint-nft
@@ -62,7 +62,7 @@ kolz bind --kol-owner <PUBKEY> --pump-mint <PUBKEY> --kol-name "satoshi"
 Mint the 1 of 1 King of the Hill NFT for a bound pet. Signed by the oracle.
 
 ```
-kolz mint-nft \
+cols mint-nft \
   --kol-owner <PUBKEY> \
   --kol-name "satoshi" \
   --name "Satoshi Throne" \
@@ -76,7 +76,7 @@ Attempt to capture the throne. The signer must currently hold more of the
 bound memecoin than the previous champion.
 
 ```
-kolz take-throne --kol-owner <PUBKEY> --kol-name "satoshi"
+cols take-throne --kol-owner <PUBKEY> --kol-name "satoshi"
 ```
 
 ### settle
@@ -84,7 +84,7 @@ kolz take-throne --kol-owner <PUBKEY> --kol-name "satoshi"
 Close the throne after the seven day settlement window. Signed by the oracle.
 
 ```
-kolz settle --kol-owner <PUBKEY> --kol-name "satoshi"
+cols settle --kol-owner <PUBKEY> --kol-name "satoshi"
 ```
 
 ### commit-root
@@ -92,7 +92,7 @@ kolz settle --kol-owner <PUBKEY> --kol-name "satoshi"
 Publish the holder distribution merkle root for an epoch.
 
 ```
-kolz commit-root --epoch 42 --root <HEX> --pool-lamports 1000000000
+cols commit-root --epoch 42 --root <HEX> --pool-lamports 1000000000
 ```
 
 ### claim
@@ -100,7 +100,7 @@ kolz commit-root --epoch 42 --root <HEX> --pool-lamports 1000000000
 Claim holder fees against a committed distribution.
 
 ```
-kolz claim --epoch 42 --amount 1000000 --proof <COMMA_SEPARATED_HEX>
+cols claim --epoch 42 --amount 1000000 --proof <COMMA_SEPARATED_HEX>
 ```
 
 ### inspect
@@ -108,10 +108,10 @@ kolz claim --epoch 42 --amount 1000000 --proof <COMMA_SEPARATED_HEX>
 Read and decode state accounts.
 
 ```
-kolz inspect pet --kol-owner <PUBKEY> --kol-name "satoshi"
-kolz inspect launch --pet <PUBKEY>
-kolz inspect king --pet <PUBKEY>
-kolz inspect distribution --epoch 42
+cols inspect pet --kol-owner <PUBKEY> --kol-name "satoshi"
+cols inspect launch --pet <PUBKEY>
+cols inspect king --pet <PUBKEY>
+cols inspect distribution --epoch 42
 ```
 
 ### grind
@@ -121,7 +121,7 @@ matching the pump.fun convention. The result is written to disk as a Solana
 keypair JSON file.
 
 ```
-kolz grind --output ./pump-mint.json --threads 8
+cols grind --output ./pump-mint.json --threads 8
 ```
 
 ## Architecture

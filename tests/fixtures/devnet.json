@@ -4,5 +4,5 @@
   "oracle": "11111111111111111111111111111111",
   "feeBasisPoints": 250,
   "metadataProgram": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
-  "notes": "Devnet sample fixture for KOLZ test harness. Oracle pubkey is the System Program as a placeholder; replace with the real oracle authority before running against a live deployment."
+  "notes": "Devnet sample fixture for COLS test harness. Oracle pubkey is the System Program as a placeholder; replace with the real oracle authority before running against a live deployment."
 }

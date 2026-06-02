@@ -170,7 +170,7 @@ pub fn run(cli: &Cli, args: MintNftArgs, format: OutputFormat) -> CliResult<()> 
 
     render(
         format,
-        "kolz mint-nft",
+        "cols mint-nft",
         &[
             ("signature", out.signature.clone()),
             ("pet_pda", out.pet_pda.clone()),

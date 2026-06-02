@@ -1,6 +1,6 @@
 # Take The Throne
 
-The "king of the hill" mechanic is the social and economic core of KOLZ. A single 1/1 NFT exists per KOL launch. Whoever holds the most of the launched memecoin holds the NFT. After approximately 7 days, the throne is permanently settled and the current holder keeps the NFT forever. This document explains the state transitions, the 7-day deadline math, and the edge cases the program handles.
+The "king of the hill" mechanic is the social and economic core of COLS. A single 1/1 NFT exists per KOL launch. Whoever holds the most of the launched memecoin holds the NFT. After approximately 7 days, the throne is permanently settled and the current holder keeps the NFT forever. This document explains the state transitions, the 7-day deadline math, and the edge cases the program handles.
 
 ## Lifecycle
 
@@ -45,7 +45,7 @@ The first holder to call `take_throne` with any nonzero memecoin balance trigger
 
 Every subsequent `take_throne` requires a strictly greater balance. The NFT is moved out of the previous champion's ATA using the king PDA as delegate. The challenger then re-approves the king PDA as delegate over their own ATA, enabling the next capture.
 
-If the previous champion has revoked the delegate via their own wallet, the transfer step fails. The on-chain code returns the SPL token error path, surfaced to the SDK as a generic token error rather than a KOLZ error. Front ends SHOULD detect this and explain the situation to the user.
+If the previous champion has revoked the delegate via their own wallet, the transfer step fails. The on-chain code returns the SPL token error path, surfaced to the SDK as a generic token error rather than a COLS error. Front ends SHOULD detect this and explain the situation to the user.
 
 `take_overs` increments by 1 on each successful capture.
 
@@ -78,8 +78,8 @@ The program stores the absolute deadline in `settles_at_slot` at the moment of f
 ```mermaid
 sequenceDiagram
     participant U as Challenger Wallet
-    participant SDK as KolzClient
-    participant P as kolz Program
+    participant SDK as ColsClient
+    participant P as cols Program
     participant ESC as Escrow ATA
     participant PREV as Prev Champion ATA
     participant ME as Challenger NFT ATA

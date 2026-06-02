@@ -7,7 +7,7 @@ pub const DISCRIMINATOR_LEN: usize = 8;
 ///
 /// Anchor derives instruction discriminators as
 /// `sha256("global:<snake_case_name>")[..8]` for the global namespace, which
-/// is the namespace used by every instruction in the kolz program.
+/// is the namespace used by every instruction in the cols program.
 pub fn instruction(name: &str) -> [u8; DISCRIMINATOR_LEN] {
     let preimage = format!("global:{}", name);
     let digest = hashv(&[preimage.as_bytes()]);

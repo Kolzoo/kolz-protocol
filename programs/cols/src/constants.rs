@@ -1,4 +1,4 @@
-//! Compile-time constants used across the KOLZ program.
+//! Compile-time constants used across the COLS program.
 //!
 //! All seeds, byte budgets, and protocol magic numbers live here so that the
 //! rest of the program never carries an opaque literal. Keep this file plain

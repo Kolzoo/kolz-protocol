@@ -146,7 +146,7 @@ pub fn run(args: GrindArgs, format: OutputFormat) -> CliResult<()> {
 
     render(
         format,
-        "kolz grind",
+        "cols grind",
         &[
             ("pubkey", out.pubkey.clone()),
             ("suffix", out.suffix.clone()),

@@ -41,7 +41,7 @@ pub struct InitConfig<'info> {
     pub system_program: Program<'info, System>,
 }
 
-/// Entry point invoked by `kolz::init_config(...)` in lib.rs.
+/// Entry point invoked by `cols::init_config(...)` in lib.rs.
 pub fn handler(
     ctx: Context<InitConfig>,
     oracle_authority: Pubkey,
@@ -59,7 +59,7 @@ pub fn handler(
 
     let slot = Clock::get()?.slot;
     msg!(
-        "kolz: config initialized admin={} oracle={} bps={}",
+        "cols: config initialized admin={} oracle={} bps={}",
         cfg.admin,
         cfg.oracle,
         cfg.fee_basis_points,

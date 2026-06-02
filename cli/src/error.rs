@@ -1,6 +1,6 @@
 use thiserror::Error;
 
-/// All error variants returned by the kolz CLI.
+/// All error variants returned by the cols CLI.
 ///
 /// Every public command in this crate returns `Result<T, CliError>` so the
 /// top level `main` function has a single error surface to report on.

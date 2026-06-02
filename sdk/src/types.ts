@@ -83,7 +83,7 @@ export interface HolderClaimAccount {
 /**
  * Union of every Anchor account type the SDK can decode.
  */
-export type KolzAccount =
+export type ColsAccount =
   | { kind: "config"; data: ConfigAccount }
   | { kind: "pet"; data: PetAccount }
   | { kind: "launch"; data: LaunchAccount }
@@ -117,7 +117,7 @@ export enum ErrorCode {
 }
 
 /**
- * Human friendly enum name for an error code, used by KolzError.
+ * Human friendly enum name for an error code, used by ColsError.
  */
 export type ErrorCodeName = keyof typeof ErrorCode;
 
@@ -129,9 +129,9 @@ export interface ClientHooks {
 }
 
 /**
- * Configuration for a KolzClient.
+ * Configuration for a ColsClient.
  */
-export interface KolzClientOptions {
+export interface ColsClientOptions {
   programId?: PublicKey;
   apiBase?: string;
   hooks?: ClientHooks;

@@ -7,15 +7,15 @@ import {
   DistributionAccount,
   HolderClaimAccount,
   KingOfHillAccount,
-  KolzAccount,
+  ColsAccount,
   LaunchAccount,
   PetAccount
 } from "./types";
-import { KolzError } from "./errors";
+import { ColsError } from "./errors";
 
 function stripDiscriminator(buf: Uint8Array, expected: Uint8Array, label: string): Uint8Array {
   if (!matchAccountDiscriminator(buf, expected)) {
-    throw new KolzError(`decoder: account is not a ${label}`);
+    throw new ColsError(`decoder: account is not a ${label}`);
   }
   return buf.slice(DISCRIMINATOR_LEN);
 }
@@ -130,10 +130,10 @@ export function decodeHolderClaim(buf: Uint8Array): HolderClaimAccount {
 }
 
 /**
- * Dispatch on the discriminator and decode whichever kolz account
+ * Dispatch on the discriminator and decode whichever cols account
  * variant a raw buffer holds. Throws when no discriminator matches.
  */
-export function decodeKolzAccount(buf: Uint8Array): KolzAccount {
+export function decodeColsAccount(buf: Uint8Array): ColsAccount {
   if (matchAccountDiscriminator(buf, ACCOUNT_DISCRIMINATORS.Config)) {
     return { kind: "config", data: decodeConfig(buf) };
   }
@@ -152,19 +152,19 @@ export function decodeKolzAccount(buf: Uint8Array): KolzAccount {
   if (matchAccountDiscriminator(buf, ACCOUNT_DISCRIMINATORS.HolderClaim)) {
     return { kind: "holderClaim", data: decodeHolderClaim(buf) };
   }
-  throw new KolzError("decoder: unknown account discriminator");
+  throw new ColsError("decoder: unknown account discriminator");
 }
 
 /**
  * Helper for callers fetching with getAccountInfo. Wraps the raw
  * account data slice as a PublicKey-tagged decoded variant.
  */
-export interface DecodedAccount<T extends KolzAccount> {
+export interface DecodedAccount<T extends ColsAccount> {
   address: PublicKey;
   account: T;
 }
 
-export function tagDecoded<T extends KolzAccount>(
+export function tagDecoded<T extends ColsAccount>(
   address: PublicKey,
   account: T
 ): DecodedAccount<T> {

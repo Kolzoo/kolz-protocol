@@ -14,7 +14,7 @@ use crate::error::{CliError, CliResult};
 /// Default mainnet endpoint used when the user does not pass `--rpc`.
 pub const DEFAULT_RPC_URL: &str = "https://api.mainnet-beta.solana.com";
 
-/// Default published program id for the kolz Anchor program. Using the
+/// Default published program id for the cols Anchor program. Using the
 /// System Program as a placeholder keeps the binary functional for local
 /// validators where the user passes `--program-id` explicitly.
 pub const DEFAULT_PROGRAM_ID: &str = "11111111111111111111111111111111";

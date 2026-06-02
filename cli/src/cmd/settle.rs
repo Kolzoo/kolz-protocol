@@ -115,7 +115,7 @@ pub fn run(cli: &Cli, args: SettleArgs, format: OutputFormat) -> CliResult<()> {
 
     render(
         format,
-        "kolz settle",
+        "cols settle",
         &[
             ("signature", out.signature.clone()),
             ("pet_pda", out.pet_pda.clone()),

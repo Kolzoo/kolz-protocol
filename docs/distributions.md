@@ -1,6 +1,6 @@
 # Holder Fee Distributions
 
-KOLZ distributes creator fees and protocol fees back to token holders on a per-epoch cadence. Each epoch the oracle builds a keccak256 merkle tree of `(holder, epoch, amount)` leaves and publishes the root on chain. Holders claim individually by submitting their inclusion proof. This document specifies the leaf layout, the tree construction, and the epoch lifecycle end to end.
+COLS distributes creator fees and protocol fees back to token holders on a per-epoch cadence. Each epoch the oracle builds a keccak256 merkle tree of `(holder, epoch, amount)` leaves and publishes the root on chain. Holders claim individually by submitting their inclusion proof. This document specifies the leaf layout, the tree construction, and the epoch lifecycle end to end.
 
 ## Epoch lifecycle
 
@@ -8,7 +8,7 @@ KOLZ distributes creator fees and protocol fees back to token holders on a per-e
 sequenceDiagram
     participant OR as Oracle Service
     participant FV as fee_vault PDA
-    participant P as kolz Program
+    participant P as cols Program
     participant H as Holder Wallet
 
     Note over OR: Epoch N opens
@@ -96,7 +96,7 @@ The `Distribution` PDA uses `epoch.to_le_bytes()` as a seed, so each epoch has a
 
 ## Single-claim enforcement
 
-`HolderClaim` is keyed by `(holder_pubkey, epoch_le_bytes)`. Creating it via Anchor `init` guarantees only one successful claim per `(holder, epoch)` pair. A second call fails when attempting to allocate the PDA, and the program maps that failure path to `KolzError::AlreadyClaimed` for a clean error message.
+`HolderClaim` is keyed by `(holder_pubkey, epoch_le_bytes)`. Creating it via Anchor `init` guarantees only one successful claim per `(holder, epoch)` pair. A second call fails when attempting to allocate the PDA, and the program maps that failure path to `ColsError::AlreadyClaimed` for a clean error message.
 
 ## Pool accounting
 
@@ -110,10 +110,10 @@ If the vault is over-funded, leftovers carry into the next epoch's pool. If unde
 ## Claim flow from a holder's perspective
 
 ```ts
-import { KolzClient } from "@kolz/sdk";
+import { ColsClient } from "@cols/sdk";
 
 const epoch = 42n;
-const allocation = await fetch(`https://kolz-api.fly.dev/distributions/${epoch}/${holder.publicKey}`)
+const allocation = await fetch(`https://cols-api.fly.dev/distributions/${epoch}/${holder.publicKey}`)
   .then(r => r.json());
 
 // allocation = { amount: "12500000", proof: ["0x...", "0x...", ...] }

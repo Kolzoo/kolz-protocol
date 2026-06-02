@@ -8,7 +8,7 @@
 use anchor_lang::prelude::*;
 
 use crate::constants::{CONFIG_SEED, DISTRIBUTION_SEED};
-use crate::errors::KolzError;
+use crate::errors::ColsError;
 use crate::events::DistributionCommitted;
 use crate::state::{Config, Distribution};
 
@@ -21,7 +21,7 @@ pub struct CommitDistributionRoot<'info> {
     #[account(
         seeds = [CONFIG_SEED],
         bump = config.bump,
-        constraint = config.oracle == oracle.key() @ KolzError::OracleMismatch,
+        constraint = config.oracle == oracle.key() @ ColsError::OracleMismatch,
     )]
     pub config: Account<'info, Config>,
 
@@ -43,14 +43,14 @@ pub fn handler(
     root: [u8; 32],
     pool_lamports: u64,
 ) -> Result<()> {
-    require!(pool_lamports > 0, KolzError::InvalidAmount);
+    require!(pool_lamports > 0, ColsError::InvalidAmount);
 
     let clock = Clock::get()?;
     let dist = &mut ctx.accounts.distribution;
     dist.initialize(epoch, root, pool_lamports, clock.slot, ctx.bumps.distribution);
 
     msg!(
-        "kolz: distribution committed epoch={} pool={} slot={}",
+        "cols: distribution committed epoch={} pool={} slot={}",
         epoch,
         pool_lamports,
         clock.slot,

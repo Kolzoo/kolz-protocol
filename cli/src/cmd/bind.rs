@@ -92,7 +92,7 @@ pub fn run(cli: &Cli, args: BindArgs, format: OutputFormat) -> CliResult<()> {
 
     render(
         format,
-        "kolz bind",
+        "cols bind",
         &[
             ("signature", out.signature.clone()),
             ("pet_pda", out.pet_pda.clone()),

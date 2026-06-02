@@ -3,7 +3,7 @@ import { PublicKey } from "@solana/web3.js";
 /**
  * Hand-rolled little endian borsh writer. We avoid pulling the full
  * @coral-xyz/anchor IDL machinery so the SDK stays slim. Only the
- * subset of borsh that the kolz program actually uses is implemented:
+ * subset of borsh that the cols program actually uses is implemented:
  * fixed sized primitives, fixed length byte arrays, length-prefixed
  * strings, and length-prefixed Vec<[u8;32]>.
  */

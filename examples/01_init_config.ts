@@ -10,13 +10,13 @@
  *   ts-node examples/01_init_config.ts
  *
  * Required env:
- *   KOLZ_RPC_URL, KOLZ_WALLET_PATH, KOLZ_ORACLE_PATH
+ *   COLS_RPC_URL, COLS_WALLET_PATH, COLS_ORACLE_PATH
  */
 
 import { sendAndConfirmTransaction, Transaction } from "@solana/web3.js";
 
 import {
-  KolzClient,
+  ColsClient,
   findConfigPda,
   fetchConfig,
 } from "../sdk/src";
@@ -32,10 +32,10 @@ import {
 const DEFAULT_FEE_BPS = 150;
 
 async function main(): Promise<void> {
-  logHeader("KOLZ example 01: init_config");
+  logHeader("COLS example 01: init_config");
 
   const env = loadEnv();
-  const client = new KolzClient({
+  const client = new ColsClient({
     connection: env.connection,
     programId: env.programId,
     payer: env.wallet,
@@ -64,9 +64,9 @@ async function main(): Promise<void> {
     return;
   }
 
-  const feeBps = Number(process.env.KOLZ_FEE_BPS ?? DEFAULT_FEE_BPS);
+  const feeBps = Number(process.env.COLS_FEE_BPS ?? DEFAULT_FEE_BPS);
   if (!Number.isInteger(feeBps) || feeBps < 0 || feeBps > 10_000) {
-    throw new Error(`KOLZ_FEE_BPS out of range: ${feeBps}`);
+    throw new Error(`COLS_FEE_BPS out of range: ${feeBps}`);
   }
   process.stdout.write(`fee bps       ${feeBps}\n`);
 

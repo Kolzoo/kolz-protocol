@@ -1,6 +1,6 @@
-# KOLZ Security Model
+# COLS Security Model
 
-This document describes the trust assumptions, signer constraints, and known attack surfaces of the KOLZ protocol. It is meant as a reference for auditors, integrators, and operators.
+This document describes the trust assumptions, signer constraints, and known attack surfaces of the COLS protocol. It is meant as a reference for auditors, integrators, and operators.
 
 ## Roles and authorities
 

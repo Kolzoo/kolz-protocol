@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to KOLZ are documented in this file.
+All notable changes to COLS are documented in this file.
 
 ## 0.4.1
 
@@ -23,6 +23,6 @@ All notable changes to KOLZ are documented in this file.
 ## 0.1.0
 
 - Initial Anchor program with `init_config` and `oracle_bind_pumpfun_launch`.
-- TypeScript SDK skeleton with `KolzClient`.
+- TypeScript SDK skeleton with `ColsClient`.
 - Rust CLI scaffold with `config init` and `launch bind`.
 - Documentation skeleton under `docs/`.

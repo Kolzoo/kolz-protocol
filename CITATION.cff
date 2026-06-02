@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this software in academic work, please cite it as below."
-title: "KOLZ Protocol"
+title: "COLS Protocol"
 abstract: "Solana protocol that binds KOL identities to pump.fun launches, mints 1/1 NFTs, runs a 7-day throne, and distributes trade fees to token holders."
 version: "0.4.1"
 date-released: "2026-05-22"
 license: MIT
-repository-code: "https://github.com/Kolzoo/kolz-protocol"
-url: "https://kolz-api.fly.dev"
+repository-code: "https://github.com/Kolzoo/cols-protocol"
+url: "https://cols-api.fly.dev"
 keywords:
   - solana
   - anchor
@@ -14,4 +14,4 @@ keywords:
   - memecoin
   - defi
 authors:
-  - name: "KOLZ contributors"
+  - name: "COLS contributors"

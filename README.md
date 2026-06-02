@@ -1,27 +1,27 @@
-<img src="./assets/banner.jpg" alt="KOLZ banner" />
+<img src="./assets/banner.jpg" alt="COLS banner" />
 
-# KOLZ
+# COLS
 
-<a href="https://github.com/Kolzoo/kolz-protocol/blob/main/LICENSE">
+<a href="https://github.com/Kolzoo/cols-protocol/blob/main/LICENSE">
   <img src="https://img.shields.io/badge/license-MIT-00ff88?style=for-the-badge" alt="license"/>
 </a>
-<a href="https://github.com/Kolzoo/kolz-protocol/actions">
-  <img src="https://img.shields.io/github/actions/workflow/status/Kolzoo/kolz-protocol/ci.yml?style=for-the-badge&label=build" alt="build"/>
+<a href="https://github.com/Kolzoo/cols-protocol/actions">
+  <img src="https://img.shields.io/github/actions/workflow/status/Kolzoo/cols-protocol/ci.yml?style=for-the-badge&label=build" alt="build"/>
 </a>
-<a href="https://github.com/Kolzoo/kolz-protocol/releases">
-  <img src="https://img.shields.io/github/v/release/Kolzoo/kolz-protocol?include_prereleases&style=for-the-badge" alt="latest release"/>
+<a href="https://github.com/Kolzoo/cols-protocol/releases">
+  <img src="https://img.shields.io/github/v/release/Kolzoo/cols-protocol?include_prereleases&style=for-the-badge" alt="latest release"/>
 </a>
-<a href="https://github.com/Kolzoo/kolz-protocol/commits">
-  <img src="https://img.shields.io/github/last-commit/Kolzoo/kolz-protocol?style=for-the-badge" alt="last commit"/>
+<a href="https://github.com/Kolzoo/cols-protocol/commits">
+  <img src="https://img.shields.io/github/last-commit/Kolzoo/cols-protocol?style=for-the-badge" alt="last commit"/>
 </a>
-<a href="https://github.com/Kolzoo/kolz-protocol/issues">
-  <img src="https://img.shields.io/github/issues/Kolzoo/kolz-protocol?style=for-the-badge" alt="open issues"/>
+<a href="https://github.com/Kolzoo/cols-protocol/issues">
+  <img src="https://img.shields.io/github/issues/Kolzoo/cols-protocol?style=for-the-badge" alt="open issues"/>
 </a>
-<a href="https://github.com/Kolzoo/kolz-protocol/stargazers">
-  <img src="https://img.shields.io/github/stars/Kolzoo/kolz-protocol?style=for-the-badge" alt="stars"/>
+<a href="https://github.com/Kolzoo/cols-protocol/stargazers">
+  <img src="https://img.shields.io/github/stars/Kolzoo/cols-protocol?style=for-the-badge" alt="stars"/>
 </a>
-<a href="https://kolz.fun">
-  <img src="https://img.shields.io/badge/website-kolz.fun-ff00aa?style=for-the-badge" alt="website"/>
+<a href="https://cols.fun">
+  <img src="https://img.shields.io/badge/website-cols.fun-ff00aa?style=for-the-badge" alt="website"/>
 </a>
 <a href="https://github.com/coral-xyz/anchor">
   <img src="https://img.shields.io/badge/anchor-0.30.1-9945ff?style=for-the-badge" alt="anchor version"/>
@@ -33,10 +33,10 @@
   <img src="https://img.shields.io/badge/typescript-ES2020-3178c6?style=for-the-badge" alt="ts target"/>
 </a>
 
-KOLZ binds Solana KOL identities to pump.fun launches. A KOL wallet that buys `$KOLZ`
+COLS binds Solana KOL identities to pump.fun launches. A KOL wallet that buys `$COLS`
 enters a queue. When the oracle pulls the trigger, the wallet's memecoin auto-spawns
 on pump.fun, a 1/1 holographic NFT is minted into escrow, a 7-day throne window opens,
-and every trade fee feeds a vault that drops to `$KOLZ` holders on a keccak merkle root.
+and every trade fee feeds a vault that drops to `$COLS` holders on a keccak merkle root.
 
 ## Features
 
@@ -44,7 +44,7 @@ Status legend: `mainnet` = deployed + verified onchain · `devnet` = deployed + 
 
 | Feature | Status |
 | --- | --- |
-| WebSocket KOL purchase detection (`$KOLZ` SPL transfers) | implemented |
+| WebSocket KOL purchase detection (`$COLS` SPL transfers) | implemented |
 | pump.fun token auto-launch via PumpPortal Lightning | implemented |
 | Vanity mint grinding (`...pump` suffix) | implemented |
 | Anchor program: `oracle_bind_pumpfun_launch` | devnet |
@@ -54,7 +54,7 @@ Status legend: `mainnet` = deployed + verified onchain · `devnet` = deployed + 
 | Holder snapshot daemon + merkle distribution builder | implemented |
 | Anchor program: `claim_holder_fees` (keccak merkle proof verification) | devnet |
 | TypeScript SDK (in `sdk/`, importable from source) | implemented |
-| Rust CLI (`kolz`) for ops, devnet inspection, vanity grinding | implemented |
+| Rust CLI (`cols`) for ops, devnet inspection, vanity grinding | implemented |
 | Devnet end-to-end test suite | tested |
 | Mainnet program deploy | pending |
 
@@ -62,19 +62,19 @@ Status legend: `mainnet` = deployed + verified onchain · `devnet` = deployed + 
 
 ```mermaid
 flowchart LR
-    A[KOL wallet] -- buys $KOLZ --> B((SPL transfer))
+    A[KOL wallet] -- buys $COLS --> B((SPL transfer))
     B -- ws logsSubscribe --> C[watcher]
     C --> D[(queue.jsonl)]
     D --> E[launcher]
     E -- /api/trade --> F[PumpPortal Lightning]
     F --> G[pump.fun mint]
-    E -- oracle_bind_pumpfun_launch --> H[kolz program]
+    E -- oracle_bind_pumpfun_launch --> H[cols program]
     H -- mint_kol_nft --> I[KingOfHill PDA + NFT escrow]
     I -- take_throne --> J[champion wallet]
     J -- settle_throne after 7 days --> K[permanent owner]
     G -- 1% trade fee --> L[fee_vault PDA]
     L -- weekly merkle root --> M[holder_claim PDA]
-    M -- claim_holder_fees --> N[$KOLZ holder]
+    M -- claim_holder_fees --> N[$COLS holder]
 ```
 
 See [`docs/architecture.md`](docs/architecture.md) for the full system diagram and component table.
@@ -82,8 +82,8 @@ See [`docs/architecture.md`](docs/architecture.md) for the full system diagram a
 ## Build
 
 ```bash
-git clone https://github.com/Kolzoo/kolz-protocol.git
-cd kolz-protocol
+git clone https://github.com/Kolzoo/cols-protocol.git
+cd cols-protocol
 
 # Rust workspace: program + cli
 cargo check --workspace
@@ -105,16 +105,16 @@ The SDK is consumed from source until the npm publish lands. After running `cd s
 
 ```typescript
 import { Connection, Keypair, sendAndConfirmTransaction, Transaction } from '@solana/web3.js';
-// From source (current): import { KolzClient } from '../sdk/dist';
-// From npm (after publish): import { KolzClient } from '@kolz/sdk';
-import { KolzClient } from '@kolz/sdk';
+// From source (current): import { ColsClient } from '../sdk/dist';
+// From npm (after publish): import { ColsClient } from '@cols/sdk';
+import { ColsClient } from '@cols/sdk';
 
 const conn   = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');
 const oracle = Keypair.fromSecretKey(/* ... */);
-const kolz   = new KolzClient(conn, /* programId */ 'Kolz1111111111111111111111111111111111111111');
+const cols   = new ColsClient(conn, /* programId */ 'Cols1111111111111111111111111111111111111111');
 
 // Bind a KOL wallet to its pump.fun mint after PumpPortal Lightning fired.
-const bindIx = await kolz.bindPumpfunLaunch({
+const bindIx = await cols.bindPumpfunLaunch({
   oracle: oracle.publicKey,
   kolName: 'cented7',
   kolOwner: new PublicKey('CENTEDxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'),
@@ -122,12 +122,12 @@ const bindIx = await kolz.bindPumpfunLaunch({
 });
 
 // Mint the 1/1 NFT into escrow with on-chain Metaplex V3 metadata.
-const nftIx = await kolz.mintKolNft({
+const nftIx = await cols.mintKolNft({
   oracle: oracle.publicKey,
-  pet: kolz.derivePetPda(kolOwner, 'cented7'),
-  name:   '@cented7 KOLZ',
-  symbol: 'KOLZ',
-  uri:    'https://api.kolz.fun/metadata/cented7.json',
+  pet: cols.derivePetPda(kolOwner, 'cented7'),
+  name:   '@cented7 COLS',
+  symbol: 'COLS',
+  uri:    'https://api.cols.fun/metadata/cented7.json',
 });
 
 const tx  = new Transaction().add(bindIx, nftIx);
@@ -136,7 +136,7 @@ const sig = await sendAndConfirmTransaction(conn, tx, [oracle]);
 ```
 
 ```rust
-use kolz_cli::{Rpc, IxSet};
+use cols_cli::{Rpc, IxSet};
 
 let rpc = Rpc::mainnet()?;
 let mut ixs = IxSet::new(rpc.program_id());
@@ -155,8 +155,8 @@ let sig = rpc.send_with(ixs, &[rpc.oracle()?]).await?;
 ## Project structure
 
 ```
-kolz-protocol/
-├── programs/kolz/
+cols-protocol/
+├── programs/cols/
 │   ├── src/
 │   │   ├── lib.rs
 │   │   ├── constants.rs
@@ -177,14 +177,14 @@ kolz-protocol/
 │   │       ├── king.rs                     # current_champion / champion_balance / settles_at_slot / settled
 │   │       ├── distribution.rs             # epoch / root / pool_lamports / committed_at
 │   │       └── holder_claim.rs             # holder / epoch / amount_claimed / claimed_at_slot
-│   ├── idl/kolz.json
+│   ├── idl/cols.json
 │   ├── Cargo.toml
 │   ├── Xargo.toml
 │   └── README.md
 ├── sdk/
 │   ├── src/
-│   │   ├── index.ts                        # re-exports KolzClient + types
-│   │   ├── client.ts                       # KolzClient: connection + every ix wrapper
+│   │   ├── index.ts                        # re-exports ColsClient + types
+│   │   ├── client.ts                       # ColsClient: connection + every ix wrapper
 │   │   ├── instructions/                   # 7 instruction builders
 │   │   ├── pdas.ts                         # derivePet / deriveLaunch / deriveKing / deriveDistribution / deriveHolderClaim
 │   │   ├── discriminators.ts               # anchor 8-byte disc helpers
@@ -192,7 +192,7 @@ kolz-protocol/
 │   │   ├── merkle.ts                       # keccak-256 merkle tree + proof verifier
 │   │   ├── types.ts                        # Config / Pet / Launch / KingOfHill / Distribution / HolderClaim
 │   │   ├── decoder.ts                      # raw bytes -> typed struct
-│   │   ├── errors.ts                       # KolzError class hierarchy
+│   │   ├── errors.ts                       # ColsError class hierarchy
 │   │   └── util.ts                         # lamports/SOL, slot/sec, bs58 helpers
 │   ├── package.json
 │   └── tsconfig.json
@@ -202,7 +202,7 @@ kolz-protocol/
 │   │   └── cmd/                            # init / bind / mint_nft / take_throne / settle / commit_root / claim / inspect / grind
 │   └── Cargo.toml
 ├── tests/
-│   ├── kolz.ts                             # end-to-end happy path
+│   ├── cols.ts                             # end-to-end happy path
 │   ├── throne.ts                           # take + settle + NotTopHolder rejection
 │   └── distribution.ts                     # 3-leaf merkle commit + claim
 ├── tests-rust/integration_test.rs          # in-process Bank exercise
@@ -291,10 +291,10 @@ Support channels: [`.github/SUPPORT.md`](.github/SUPPORT.md).
 
 ## Links
 
-- Website: [kolz.fun](https://kolz.fun)
-- X: [@kolz_oo](https://x.com/kolz_oo)
-- GitHub: [Kolzoo/kolz-protocol](https://github.com/Kolzoo/kolz-protocol)
-- Ticker: `$KOLZ`
+- Website: [cols.fun](https://cols.fun)
+- X: [@cols_oo](https://x.com/cols_oo)
+- GitHub: [Kolzoo/cols-protocol](https://github.com/Kolzoo/cols-protocol)
+- Ticker: `$COLS`
 - Documentation: [`docs/`](docs/)
 
 ## License

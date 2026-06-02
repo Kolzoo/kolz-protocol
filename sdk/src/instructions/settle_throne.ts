@@ -7,7 +7,7 @@ import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { BorshWriter } from "../borsh";
 import { IX_DISCRIMINATORS } from "../discriminators";
 import { configPda, kingOfHillPda, petPda } from "../pdas";
-import { KOLZ_PROGRAM_ID } from "../constants";
+import { COLS_PROGRAM_ID } from "../constants";
 import { encodeKolName } from "../util";
 
 /**
@@ -35,7 +35,7 @@ export interface SettleThroneArgs {
  *   6. token program           []
  */
 export function buildSettleThroneIx(args: SettleThroneArgs): TransactionInstruction {
-  const programId = args.programId ?? KOLZ_PROGRAM_ID;
+  const programId = args.programId ?? COLS_PROGRAM_ID;
 
   const kolNameBytes =
     typeof args.kolName === "string" ? encodeKolName(args.kolName) : args.kolName;

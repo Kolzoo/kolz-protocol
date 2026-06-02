@@ -7,7 +7,7 @@ import {
 import { BorshWriter } from "../borsh";
 import { IX_DISCRIMINATORS } from "../discriminators";
 import { configPda, launchPda, petPda } from "../pdas";
-import { KOLZ_PROGRAM_ID, MAX_KOL_NAME_BYTES } from "../constants";
+import { COLS_PROGRAM_ID, MAX_KOL_NAME_BYTES } from "../constants";
 import { encodeKolName } from "../util";
 
 /**
@@ -36,7 +36,7 @@ export interface BindLaunchArgs {
  *   6. system program      []
  */
 export function buildBindLaunchIx(args: BindLaunchArgs): TransactionInstruction {
-  const programId = args.programId ?? KOLZ_PROGRAM_ID;
+  const programId = args.programId ?? COLS_PROGRAM_ID;
   const kolNameBytes =
     typeof args.kolName === "string" ? encodeKolName(args.kolName) : args.kolName;
 

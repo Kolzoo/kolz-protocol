@@ -3,7 +3,7 @@
 ## Our pledge
 
 We as contributors and maintainers pledge to make participation in the
-KOLZ project a respectful and harassment free experience for everyone.
+COLS project a respectful and harassment free experience for everyone.
 
 ## Our standards
 

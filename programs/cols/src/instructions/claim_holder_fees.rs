@@ -10,7 +10,7 @@ use anchor_lang::solana_program::program::invoke_signed;
 use anchor_lang::solana_program::system_instruction;
 
 use crate::constants::{CONFIG_SEED, DISTRIBUTION_SEED, FEE_VAULT_SEED, HOLDER_CLAIM_SEED};
-use crate::errors::KolzError;
+use crate::errors::ColsError;
 use crate::events::HolderClaimed;
 use crate::state::{Config, Distribution, HolderClaim};
 use crate::utils::{compute_distribution_leaf, verify_merkle_proof};
@@ -33,7 +33,7 @@ pub struct ClaimHolderFees<'info> {
     #[account(
         seeds = [DISTRIBUTION_SEED, epoch.to_le_bytes().as_ref()],
         bump = distribution.bump,
-        constraint = distribution.epoch == epoch @ KolzError::EpochNotCommitted,
+        constraint = distribution.epoch == epoch @ ColsError::EpochNotCommitted,
     )]
     pub distribution: Account<'info, Distribution>,
 
@@ -69,26 +69,26 @@ pub fn handler(
     amount: u64,
     proof: Vec<[u8; 32]>,
 ) -> Result<()> {
-    require!(amount > 0, KolzError::InvalidAmount);
+    require!(amount > 0, ColsError::InvalidAmount);
 
     // Sanity: the holder_claim PDA should be fresh. Because of `init` we know
     // discriminator was just written, but we also defend against any future
     // refactor by reading the amount_claimed field.
     require!(
         ctx.accounts.holder_claim.amount_claimed == 0,
-        KolzError::AlreadyClaimed
+        ColsError::AlreadyClaimed
     );
 
     let dist = &ctx.accounts.distribution;
     let leaf = compute_distribution_leaf(&ctx.accounts.holder.key(), epoch, amount);
     require!(
         verify_merkle_proof(leaf, &proof, dist.root),
-        KolzError::InvalidProof
+        ColsError::InvalidProof
     );
 
     let fee_vault_info = ctx.accounts.fee_vault.to_account_info();
     let vault_lamports = **fee_vault_info.lamports.borrow();
-    require!(vault_lamports >= amount, KolzError::InsufficientVault);
+    require!(vault_lamports >= amount, ColsError::InsufficientVault);
 
     // Move lamports vault -> holder via a signed CPI to the system program.
     let fee_vault_bump = ctx.bumps.fee_vault;
@@ -120,7 +120,7 @@ pub fn handler(
     );
 
     msg!(
-        "kolz: holder claimed epoch={} amount={} holder={}",
+        "cols: holder claimed epoch={} amount={} holder={}",
         epoch,
         amount,
         ctx.accounts.holder.key(),

@@ -1,19 +1,19 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/KOLZ-examples-00ff41?style=flat-square" alt="KOLZ examples" />
+  <img src="https://img.shields.io/badge/COLS-examples-00ff41?style=flat-square" alt="COLS examples" />
   <img src="https://img.shields.io/badge/solana-1.18.26-9945FF?style=flat-square" alt="solana 1.18.26" />
   <img src="https://img.shields.io/badge/anchor-0.30.1-blue?style=flat-square" alt="anchor 0.30.1" />
   <img src="https://img.shields.io/badge/typescript-ES2020-3178c6?style=flat-square" alt="typescript ES2020" />
   <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" alt="MIT" />
 </p>
 
-# KOLZ Examples
+# COLS Examples
 
-Runnable, single-file TypeScript scripts that exercise every instruction in the KOLZ on-chain program end to end. Each example is a standalone entry point that you can run with `ts-node` against a real Solana cluster (devnet by default). Every script imports the SDK from `../sdk/src` so the examples stay in lockstep with the source as it evolves.
+Runnable, single-file TypeScript scripts that exercise every instruction in the COLS on-chain program end to end. Each example is a standalone entry point that you can run with `ts-node` against a real Solana cluster (devnet by default). Every script imports the SDK from `../sdk/src` so the examples stay in lockstep with the source as it evolves.
 
-KOLZ is an Anchor program that bonds a KOL identity to a pump.fun launch, mints a 1/1 King of the Hill NFT, lets the largest memecoin holder seize the throne, and distributes pooled fees to holders via keccak256 merkle proofs. The on-chain spec, account layouts, and error codes are documented inline in each example.
+COLS is an Anchor program that bonds a KOL identity to a pump.fun launch, mints a 1/1 King of the Hill NFT, lets the largest memecoin holder seize the throne, and distributes pooled fees to holders via keccak256 merkle proofs. The on-chain spec, account layouts, and error codes are documented inline in each example.
 
-Protocol home: https://github.com/Kolzoo/kolz-protocol
-Oracle and snapshot API: https://kolz-api.fly.dev
+Protocol home: https://github.com/Kolzoo/cols-protocol
+Oracle and snapshot API: https://cols-api.fly.dev
 
 ## Layout
 
@@ -37,7 +37,7 @@ examples/
 ## Prerequisites
 
 1. Node.js 18 or newer.
-2. A built copy of the KOLZ TypeScript SDK at `sdk/src/`. Examples import from that path directly, so no install step is needed.
+2. A built copy of the COLS TypeScript SDK at `sdk/src/`. Examples import from that path directly, so no install step is needed.
 3. A Solana keypair JSON file (the standard 64-byte array format produced by `solana-keygen new -o wallet.json`).
 4. An RPC endpoint. Devnet is fine for the full walk-through.
 
@@ -47,17 +47,17 @@ Examples read configuration from environment variables. A colocated `.env` file 
 
 | Variable | Required | Description |
 | --- | --- | --- |
-| KOLZ_RPC_URL | no | JSON RPC URL. Defaults to https://api.devnet.solana.com. |
-| KOLZ_WS_URL | no | Optional websocket endpoint. |
-| KOLZ_WALLET_PATH | yes | Path to the signer keypair JSON. |
-| KOLZ_ORACLE_PATH | no | Path to the oracle authority keypair. Falls back to KOLZ_WALLET_PATH. |
-| KOLZ_PROGRAM_ID | no | Deployed program id. Defaults to the SDK constant. |
-| KOLZ_COMMITMENT | no | `processed`, `confirmed`, or `finalized`. Default `confirmed`. |
-| KOLZ_API_BASE | no | Off-chain oracle service base URL. |
-| KOLZ_KOL_NAME | no | Identifier passed into the Pet PDA seed. |
-| KOLZ_KOL_OWNER | no | Base58 pubkey of the KOL owner. |
-| KOLZ_PUMP_MINT | no | Base58 pubkey of the pump.fun mint to bond. |
-| KOLZ_FEE_BPS | no | Protocol fee basis points used during init. |
+| COLS_RPC_URL | no | JSON RPC URL. Defaults to https://api.devnet.solana.com. |
+| COLS_WS_URL | no | Optional websocket endpoint. |
+| COLS_WALLET_PATH | yes | Path to the signer keypair JSON. |
+| COLS_ORACLE_PATH | no | Path to the oracle authority keypair. Falls back to COLS_WALLET_PATH. |
+| COLS_PROGRAM_ID | no | Deployed program id. Defaults to the SDK constant. |
+| COLS_COMMITMENT | no | `processed`, `confirmed`, or `finalized`. Default `confirmed`. |
+| COLS_API_BASE | no | Off-chain oracle service base URL. |
+| COLS_KOL_NAME | no | Identifier passed into the Pet PDA seed. |
+| COLS_KOL_OWNER | no | Base58 pubkey of the KOL owner. |
+| COLS_PUMP_MINT | no | Base58 pubkey of the pump.fun mint to bond. |
+| COLS_FEE_BPS | no | Protocol fee basis points used during init. |
 
 ## Running
 
@@ -156,6 +156,6 @@ Errors surfaced by the program:
 
 ## Notes
 
-- All examples assume devnet by default. Set `KOLZ_RPC_URL` to point elsewhere.
+- All examples assume devnet by default. Set `COLS_RPC_URL` to point elsewhere.
 - The sample JSON files in `data/` use the System Program (`11111111111111111111111111111111`) and standard sysvar addresses so that they remain valid base58 strings without referencing third-party wallets.
-- The `take_throne` example generates fresh keypairs for Alice and Bob when explicit secrets are not provided. For repeatable runs, set `KOLZ_ALICE_SECRET` and `KOLZ_BOB_SECRET` to JSON byte arrays.
+- The `take_throne` example generates fresh keypairs for Alice and Bob when explicit secrets are not provided. For repeatable runs, set `COLS_ALICE_SECRET` and `COLS_BOB_SECRET` to JSON byte arrays.

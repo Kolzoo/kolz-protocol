@@ -7,7 +7,7 @@ import {
 import { BorshWriter } from "../borsh";
 import { IX_DISCRIMINATORS } from "../discriminators";
 import { configPda, distributionPda } from "../pdas";
-import { KOLZ_PROGRAM_ID } from "../constants";
+import { COLS_PROGRAM_ID } from "../constants";
 
 /**
  * Arguments to commit a per-epoch merkle root that holders will use
@@ -33,7 +33,7 @@ export interface CommitDistributionRootArgs {
 export function buildCommitDistributionRootIx(
   args: CommitDistributionRootArgs
 ): TransactionInstruction {
-  const programId = args.programId ?? KOLZ_PROGRAM_ID;
+  const programId = args.programId ?? COLS_PROGRAM_ID;
   if (args.root.length !== 32) {
     throw new Error(
       `buildCommitDistributionRootIx: root must be 32 bytes, got ${args.root.length}`

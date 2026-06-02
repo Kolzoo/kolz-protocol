@@ -1,20 +1,20 @@
 /**
- * Shared environment loader for the KOLZ example scripts.
+ * Shared environment loader for the COLS example scripts.
  *
  * Reads a small set of variables from the process environment, falls back to
  * a colocated .env file when present, and exposes a single loadEnv() entry
  * point that every example consumes. Each script can run in isolation as long
- * as KOLZ_RPC_URL and KOLZ_WALLET_PATH point at a real cluster and a real
+ * as COLS_RPC_URL and COLS_WALLET_PATH point at a real cluster and a real
  * funded keypair.
  *
  * Environment variables consumed:
- *   KOLZ_RPC_URL          Solana JSON RPC endpoint (devnet by default)
- *   KOLZ_WS_URL           Optional websocket endpoint, derived from RPC if absent
- *   KOLZ_WALLET_PATH      Filesystem path to a JSON byte-array Solana keypair
- *   KOLZ_ORACLE_PATH      Filesystem path to the oracle authority keypair
- *   KOLZ_PROGRAM_ID       Deployed KOLZ program id, defaults to the devnet build
- *   KOLZ_COMMITMENT       Commitment level: processed | confirmed | finalized
- *   KOLZ_API_BASE         REST endpoint for the off-chain merkle / oracle service
+ *   COLS_RPC_URL          Solana JSON RPC endpoint (devnet by default)
+ *   COLS_WS_URL           Optional websocket endpoint, derived from RPC if absent
+ *   COLS_WALLET_PATH      Filesystem path to a JSON byte-array Solana keypair
+ *   COLS_ORACLE_PATH      Filesystem path to the oracle authority keypair
+ *   COLS_PROGRAM_ID       Deployed COLS program id, defaults to the devnet build
+ *   COLS_COMMITMENT       Commitment level: processed | confirmed | finalized
+ *   COLS_API_BASE         REST endpoint for the off-chain merkle / oracle service
  */
 
 import * as fs from "fs";
@@ -26,13 +26,13 @@ import {
   Commitment,
 } from "@solana/web3.js";
 
-import { PROGRAM_ID as SDK_PROGRAM_ID, KOLZ_API_BASE } from "../../sdk/src";
+import { PROGRAM_ID as SDK_PROGRAM_ID, COLS_API_BASE } from "../../sdk/src";
 
 const DEFAULT_RPC = "https://api.devnet.solana.com";
 const DEFAULT_COMMITMENT: Commitment = "confirmed";
-const DEFAULT_API = "https://kolz-api.fly.dev";
+const DEFAULT_API = "https://cols-api.fly.dev";
 
-export interface KolzEnv {
+export interface ColsEnv {
   connection: Connection;
   wallet: Keypair;
   oracle: Keypair;
@@ -95,26 +95,26 @@ function parseCommitment(raw: string | undefined): Commitment {
   }
 }
 
-export function loadEnv(): KolzEnv {
+export function loadEnv(): ColsEnv {
   readDotEnv();
 
-  const rpcUrl = process.env.KOLZ_RPC_URL ?? DEFAULT_RPC;
-  const wsUrl = process.env.KOLZ_WS_URL;
-  const commitment = parseCommitment(process.env.KOLZ_COMMITMENT);
+  const rpcUrl = process.env.COLS_RPC_URL ?? DEFAULT_RPC;
+  const wsUrl = process.env.COLS_WS_URL;
+  const commitment = parseCommitment(process.env.COLS_COMMITMENT);
 
-  const walletPath = process.env.KOLZ_WALLET_PATH;
+  const walletPath = process.env.COLS_WALLET_PATH;
   if (!walletPath) {
-    throw new Error("KOLZ_WALLET_PATH is required (path to wallet keypair json)");
+    throw new Error("COLS_WALLET_PATH is required (path to wallet keypair json)");
   }
-  const oraclePath = process.env.KOLZ_ORACLE_PATH ?? walletPath;
+  const oraclePath = process.env.COLS_ORACLE_PATH ?? walletPath;
 
   const wallet = loadKeypair(walletPath);
   const oracle = loadKeypair(oraclePath);
 
-  const programIdRaw = process.env.KOLZ_PROGRAM_ID;
+  const programIdRaw = process.env.COLS_PROGRAM_ID;
   const programId = programIdRaw ? new PublicKey(programIdRaw) : SDK_PROGRAM_ID;
 
-  const apiBase = process.env.KOLZ_API_BASE ?? KOLZ_API_BASE ?? DEFAULT_API;
+  const apiBase = process.env.COLS_API_BASE ?? COLS_API_BASE ?? DEFAULT_API;
 
   const connection = new Connection(rpcUrl, {
     commitment,
@@ -143,7 +143,7 @@ export function lamportsToSol(lamports: number | bigint): string {
 }
 
 export async function airdropIfNeeded(
-  env: KolzEnv,
+  env: ColsEnv,
   target: PublicKey,
   minSol: number,
 ): Promise<void> {

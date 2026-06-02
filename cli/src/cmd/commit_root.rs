@@ -110,7 +110,7 @@ pub fn run(cli: &Cli, args: CommitRootArgs, format: OutputFormat) -> CliResult<(
 
     render(
         format,
-        "kolz commit-root",
+        "cols commit-root",
         &[
             ("signature", out.signature.clone()),
             ("distribution_pda", out.distribution_pda.clone()),

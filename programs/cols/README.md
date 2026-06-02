@@ -1,6 +1,6 @@
-# `kolz` program
+# `cols` program
 
-Anchor 0.30.1 on-chain program for KOLZ. Compiled with solana-program 1.18.26.
+Anchor 0.30.1 on-chain program for COLS. Compiled with solana-program 1.18.26.
 
 ## Instructions
 
@@ -40,10 +40,10 @@ Anchor 0.30.1 on-chain program for KOLZ. Compiled with solana-program 1.18.26.
 # from the repo root
 anchor build
 # or just check
-cargo check -p kolz
+cargo check -p cols
 ```
 
-The hand-rolled IDL JSON lives at `programs/kolz/idl/kolz.json` and is committed
+The hand-rolled IDL JSON lives at `programs/cols/idl/cols.json` and is committed
 so consumers do not need to build the program to integrate.
 
 ## Pinned versions

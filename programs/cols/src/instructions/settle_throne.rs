@@ -8,7 +8,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{revoke, Mint, Revoke, Token, TokenAccount};
 
 use crate::constants::{CONFIG_SEED, KING_SEED, PET_SEED};
-use crate::errors::KolzError;
+use crate::errors::ColsError;
 use crate::events::ThroneSettled;
 use crate::state::{Config, KingOfHill, Pet};
 
@@ -21,7 +21,7 @@ pub struct SettleThrone<'info> {
     #[account(
         seeds = [CONFIG_SEED],
         bump = config.bump,
-        constraint = config.oracle == oracle.key() @ KolzError::OracleMismatch,
+        constraint = config.oracle == oracle.key() @ ColsError::OracleMismatch,
     )]
     pub config: Account<'info, Config>,
 
@@ -35,7 +35,7 @@ pub struct SettleThrone<'info> {
         mut,
         seeds = [KING_SEED, pet.key().as_ref()],
         bump = king.bump,
-        constraint = king.pet == pet.key() @ KolzError::PetMismatch,
+        constraint = king.pet == pet.key() @ ColsError::PetMismatch,
     )]
     pub king: Account<'info, KingOfHill>,
 
@@ -43,8 +43,8 @@ pub struct SettleThrone<'info> {
     /// this account; revoking it is the on-chain settlement signal.
     #[account(
         mut,
-        constraint = champion_nft_ata.owner == king.current_champion @ KolzError::AtaOwnerMismatch,
-        constraint = champion_nft_ata.mint == king.nft_mint @ KolzError::MintMismatch,
+        constraint = champion_nft_ata.owner == king.current_champion @ ColsError::AtaOwnerMismatch,
+        constraint = champion_nft_ata.mint == king.nft_mint @ ColsError::MintMismatch,
     )]
     pub champion_nft_ata: Account<'info, TokenAccount>,
 
@@ -56,16 +56,16 @@ pub struct SettleThrone<'info> {
 
 pub fn handler(ctx: Context<SettleThrone>) -> Result<()> {
     let king = &mut ctx.accounts.king;
-    require!(!king.settled, KolzError::AlreadySettled);
+    require!(!king.settled, ColsError::AlreadySettled);
     require!(
         king.settles_at_slot != 0,
-        KolzError::SettlementNotReady
+        ColsError::SettlementNotReady
     );
 
     let clock = Clock::get()?;
     require!(
         clock.slot >= king.settles_at_slot,
-        KolzError::SettlementNotReady
+        ColsError::SettlementNotReady
     );
 
     let pet_key = ctx.accounts.pet.key();
@@ -107,7 +107,7 @@ pub fn handler(ctx: Context<SettleThrone>) -> Result<()> {
     king.settled = true;
 
     msg!(
-        "kolz: throne settled pet={} champion={} slot={}",
+        "cols: throne settled pet={} champion={} slot={}",
         pet_key,
         king.current_champion,
         clock.slot,

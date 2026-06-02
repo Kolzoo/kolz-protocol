@@ -1,6 +1,6 @@
-# KOLZ Deployment
+# COLS Deployment
 
-This document covers building, deploying, and configuring the `kolz` program across localnet, devnet, and mainnet. Versions are pinned to `anchor = "0.30.1"` and `solana-program = "=1.18.26"`.
+This document covers building, deploying, and configuring the `cols` program across localnet, devnet, and mainnet. Versions are pinned to `anchor = "0.30.1"` and `solana-program = "=1.18.26"`.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ On Windows, install Visual Studio Build Tools with the Desktop C++ workload and 
 anchor build
 ```
 
-The compiled program lives at `target/deploy/kolz.so` and the program keypair at `target/deploy/kolz-keypair.json`. Anchor writes the IDL to `target/idl/kolz.json`.
+The compiled program lives at `target/deploy/cols.so` and the program keypair at `target/deploy/cols-keypair.json`. Anchor writes the IDL to `target/idl/cols.json`.
 
 ## Localnet
 
@@ -28,7 +28,7 @@ Start a local validator and deploy.
 
 ```bash
 solana-test-validator --reset \
-  --bpf-program 11111111111111111111111111111111 target/deploy/kolz.so \
+  --bpf-program 11111111111111111111111111111111 target/deploy/cols.so \
   --quiet &
 
 solana config set --url http://127.0.0.1:8899
@@ -56,7 +56,7 @@ The program is live on devnet.
 Set the program id in your shell profile or the deployment `.env`:
 
 ```bash
-export KOLZ_PROGRAM_ID=9bjyD3Vs6YBUUX5P6Tg2S4JZorbCiC4ZJjpzyQUeDvgJ
+export COLS_PROGRAM_ID=9bjyD3Vs6YBUUX5P6Tg2S4JZorbCiC4ZJjpzyQUeDvgJ
 ```
 
 To redeploy or update the buffer:
@@ -70,7 +70,7 @@ anchor deploy --provider.cluster devnet --program-id 9bjyD3Vs6YBUUX5P6Tg2S4JZorb
 After deploy, initialize the protocol:
 
 ```bash
-kolz config init \
+cols config init \
   --oracle-authority <oracle_pubkey> \
   --fee-basis-points 250
 ```
@@ -79,22 +79,22 @@ kolz config init \
 
 Mainnet deploy uses a multisig-controlled buffer. The recommended flow:
 
-1. Build with `anchor build`, verify SHA-256 of `target/deploy/kolz.so` against the release artifact in `https://github.com/Kolzoo/kolz-protocol`.
+1. Build with `anchor build`, verify SHA-256 of `target/deploy/cols.so` against the release artifact in `https://github.com/Kolzoo/cols-protocol`.
 2. Write the buffer:
 
    ```bash
-   solana program write-buffer target/deploy/kolz.so \
+   solana program write-buffer target/deploy/cols.so \
      --buffer-authority <multisig_pubkey>
    ```
 
 3. Submit a multisig transaction to upgrade the program from the buffer.
-4. Run `kolz config init` from the admin multisig.
+4. Run `cols config init` from the admin multisig.
 
 Production RPC selection matters. Use a paid RPC with `processed`/`confirmed` separation, not the public mainnet endpoint.
 
 ## Account rent math
 
-Solana rent-exempt minimums are computed as `lamports = bytes * lamports_per_byte_year * 2 years`. With current rent constants, the rent-exempt floor is approximately `0.00000348 SOL per byte`. The KOLZ accounts size out to:
+Solana rent-exempt minimums are computed as `lamports = bytes * lamports_per_byte_year * 2 years`. With current rent constants, the rent-exempt floor is approximately `0.00000348 SOL per byte`. The COLS accounts size out to:
 
 | Account       | Bytes | Rent SOL  |
 | ------------- | ----- | --------- |
@@ -116,11 +116,11 @@ The CLI, SDK, and oracle service all respect the following:
 
 | Variable          | Purpose                                        |
 | ----------------- | ---------------------------------------------- |
-| `KOLZ_PROGRAM_ID` | Deployed program id                            |
-| `KOLZ_RPC_URL`    | Solana RPC endpoint                            |
-| `KOLZ_ORACLE_KEY` | Path to oracle keypair                         |
-| `KOLZ_ADMIN_KEY`  | Path to admin keypair                          |
-| `KOLZ_API_URL`    | Public API root, defaults to `https://kolz-api.fly.dev` |
+| `COLS_PROGRAM_ID` | Deployed program id                            |
+| `COLS_RPC_URL`    | Solana RPC endpoint                            |
+| `COLS_ORACLE_KEY` | Path to oracle keypair                         |
+| `COLS_ADMIN_KEY`  | Path to admin keypair                          |
+| `COLS_API_URL`    | Public API root, defaults to `https://cols-api.fly.dev` |
 
 ## Upgrade and rotation
 
@@ -132,11 +132,11 @@ An optional hardening step is to make the program immutable by closing the upgra
 ## Verifying a deployment
 
 ```bash
-solana program show <KOLZ_PROGRAM_ID>
-kolz config show
+solana program show <COLS_PROGRAM_ID>
+cols config show
 ```
 
-The `kolz config show` output must list a non-zero `oracle` pubkey and a non-zero `fee_basis_points`. If either is zero, the protocol has not been initialized and instructions will fail with `OracleMismatch` or related errors.
+The `cols config show` output must list a non-zero `oracle` pubkey and a non-zero `fee_basis_points`. If either is zero, the protocol has not been initialized and instructions will fail with `OracleMismatch` or related errors.
 
 ## See also
 

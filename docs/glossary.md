@@ -1,6 +1,6 @@
-# KOLZ Glossary
+# COLS Glossary
 
-Short definitions of every term used across the KOLZ documentation. Sorted alphabetically.
+Short definitions of every term used across the COLS documentation. Sorted alphabetically.
 
 ## Admin
 
@@ -12,7 +12,7 @@ The Solana slot number at which a `Launch` PDA was created via `oracle_bind_pump
 
 ## Bonding curve
 
-The constant-product market maker that pump.fun runs per memecoin until it accumulates enough SOL to graduate to a Raydium pool. KOLZ does not own the curve, it observes it.
+The constant-product market maker that pump.fun runs per memecoin until it accumulates enough SOL to graduate to a Raydium pool. COLS does not own the curve, it observes it.
 
 ## Champion
 
@@ -88,7 +88,7 @@ The off-chain signer authorized to call `oracle_bind_pumpfun_launch`, `mint_kol_
 
 ## Pet PDA
 
-The KOL identity inside KOLZ. PDA seeds are `["pet", kol_owner, kol_name]`. Owns no funds. Acts as the namespace anchor for `Launch` and `KingOfHill` PDAs.
+The KOL identity inside COLS. PDA seeds are `["pet", kol_owner, kol_name]`. Owns no funds. Acts as the namespace anchor for `Launch` and `KingOfHill` PDAs.
 
 ## Pool lamports
 

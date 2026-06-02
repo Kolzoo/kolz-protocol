@@ -21,7 +21,7 @@ import {
 } from "@solana/web3.js";
 
 import {
-  KolzClient,
+  ColsClient,
   encodeKolName,
   findConfigPda,
   findPetPda,
@@ -39,15 +39,15 @@ import {
 } from "./lib/env";
 
 const DEFAULT_KOL_NAME = "satoshi-of-pumpfun";
-const DEFAULT_NFT_NAME = "KOLZ Crown";
+const DEFAULT_NFT_NAME = "COLS Crown";
 const DEFAULT_NFT_SYMBOL = "KCROWN";
-const DEFAULT_NFT_URI = "https://kolz-api.fly.dev/metadata/sample.json";
+const DEFAULT_NFT_URI = "https://cols-api.fly.dev/metadata/sample.json";
 
 async function main(): Promise<void> {
-  logHeader("KOLZ example 03: mint 1/1 KingOfHill NFT");
+  logHeader("COLS example 03: mint 1/1 KingOfHill NFT");
 
   const env = loadEnv();
-  const client = new KolzClient({
+  const client = new ColsClient({
     connection: env.connection,
     programId: env.programId,
     payer: env.oracle,
@@ -61,9 +61,9 @@ async function main(): Promise<void> {
     throw new Error("Signer is not the configured oracle authority");
   }
 
-  const kolNameStr = process.env.KOLZ_KOL_NAME ?? DEFAULT_KOL_NAME;
+  const kolNameStr = process.env.COLS_KOL_NAME ?? DEFAULT_KOL_NAME;
   const kolNameBytes = encodeKolName(kolNameStr);
-  const kolOwnerRaw = process.env.KOLZ_KOL_OWNER;
+  const kolOwnerRaw = process.env.COLS_KOL_OWNER;
   const kolOwner: PublicKey = kolOwnerRaw
     ? new PublicKey(kolOwnerRaw)
     : Keypair.generate().publicKey;
@@ -87,9 +87,9 @@ async function main(): Promise<void> {
   const mint = Keypair.generate();
   process.stdout.write(`nft mint      ${mint.publicKey.toBase58()}\n`);
 
-  const nftName = (process.env.KOLZ_NFT_NAME ?? DEFAULT_NFT_NAME).slice(0, 32);
-  const nftSymbol = (process.env.KOLZ_NFT_SYMBOL ?? DEFAULT_NFT_SYMBOL).slice(0, 10);
-  const nftUri = (process.env.KOLZ_NFT_URI ?? DEFAULT_NFT_URI).slice(0, 200);
+  const nftName = (process.env.COLS_NFT_NAME ?? DEFAULT_NFT_NAME).slice(0, 32);
+  const nftSymbol = (process.env.COLS_NFT_SYMBOL ?? DEFAULT_NFT_SYMBOL).slice(0, 10);
+  const nftUri = (process.env.COLS_NFT_URI ?? DEFAULT_NFT_URI).slice(0, 200);
 
   process.stdout.write(`name          ${nftName}\n`);
   process.stdout.write(`symbol        ${nftSymbol}\n`);

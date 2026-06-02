@@ -1,4 +1,4 @@
-//! KOLZ on-chain program.
+//! COLS on-chain program.
 //!
 //! Top-level dispatch module. Every instruction handler lives in its own
 //! file under `instructions/`. Each wrapper here simply forwards to the
@@ -29,10 +29,10 @@ pub mod utils;
 use crate::constants::KOL_NAME_LEN;
 use crate::instructions::*;
 
-declare_id!("Kolz1111111111111111111111111111111111111111");
+declare_id!("Cols1111111111111111111111111111111111111111");
 
 #[program]
-pub mod kolz {
+pub mod cols {
     use super::*;
 
     /// One-shot config bootstrap. Only callable while the Config PDA does

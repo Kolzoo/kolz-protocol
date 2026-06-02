@@ -1,7 +1,7 @@
 {
-  "name": "@kolz/sdk",
+  "name": "@cols/sdk",
   "version": "0.1.0",
-  "description": "Official TypeScript SDK for the KOLZ on-chain protocol. Build, sign, and send instructions for KOL pet bonding, King of the Hill NFT capture, and holder fee distribution.",
+  "description": "Official TypeScript SDK for the COLS on-chain protocol. Build, sign, and send instructions for KOL pet bonding, King of the Hill NFT capture, and holder fee distribution.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -18,7 +18,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "keywords": [
-    "kolz",
+    "cols",
     "solana",
     "anchor",
     "spl",
@@ -32,13 +32,13 @@
     "email": "289228263+Kolzoo@users.noreply.github.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/Kolzoo/kolz-protocol#readme",
+  "homepage": "https://github.com/Kolzoo/cols-protocol#readme",
   "bugs": {
-    "url": "https://github.com/Kolzoo/kolz-protocol/issues"
+    "url": "https://github.com/Kolzoo/cols-protocol/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kolzoo/kolz-protocol.git",
+    "url": "git+https://github.com/Kolzoo/cols-protocol.git",
     "directory": "sdk"
   },
   "publishConfig": {

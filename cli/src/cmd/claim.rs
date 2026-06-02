@@ -127,7 +127,7 @@ pub fn run(cli: &Cli, args: ClaimArgs, format: OutputFormat) -> CliResult<()> {
 
     render(
         format,
-        "kolz claim",
+        "cols claim",
         &[
             ("signature", out.signature.clone()),
             ("holder", out.holder.clone()),

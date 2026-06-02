@@ -1,7 +1,7 @@
 //! `Launch` account: a mirror of the pump.fun bonding curve state for a pet.
 //!
 //! The oracle updates this account whenever it observes the bonding curve
-//! moving on chain. KOLZ reads the cached fields to make local decisions
+//! moving on chain. COLS reads the cached fields to make local decisions
 //! without paying for a CPI into the pump.fun program.
 
 use anchor_lang::prelude::*;

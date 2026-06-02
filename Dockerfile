@@ -15,7 +15,7 @@ WORKDIR /build
 
 COPY Cargo.toml Cargo.toml
 COPY cli/Cargo.toml cli/Cargo.toml
-COPY programs/kolz/Cargo.toml programs/kolz/Cargo.toml
+COPY programs/cols/Cargo.toml programs/cols/Cargo.toml
 COPY rust-toolchain.toml rust-toolchain.toml
 COPY rustfmt.toml rustfmt.toml
 COPY clippy.toml clippy.toml
@@ -23,7 +23,7 @@ COPY clippy.toml clippy.toml
 COPY programs programs
 COPY cli cli
 
-RUN cargo build --release -p kolz-cli
+RUN cargo build --release -p cols-cli
 
 FROM debian:bookworm-slim AS runtime
 
@@ -32,13 +32,13 @@ RUN apt-get update \
         ca-certificates \
         libssl3 \
     && rm -rf /var/lib/apt/lists/* \
-    && groupadd --system --gid 1000 kolz \
-    && useradd --system --uid 1000 --gid kolz --create-home --shell /bin/bash kolz
+    && groupadd --system --gid 1000 cols \
+    && useradd --system --uid 1000 --gid cols --create-home --shell /bin/bash cols
 
-COPY --from=builder /build/target/release/kolz /usr/local/bin/kolz
+COPY --from=builder /build/target/release/cols /usr/local/bin/cols
 
-USER kolz
-WORKDIR /home/kolz
+USER cols
+WORKDIR /home/cols
 
-ENTRYPOINT ["kolz"]
+ENTRYPOINT ["cols"]
 CMD ["--help"]

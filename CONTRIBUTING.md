@@ -1,4 +1,4 @@
-# Contributing to KOLZ
+# Contributing to COLS
 
 Thanks for taking the time to contribute. This document explains how to file issues, propose changes, and get a pull request merged.
 
@@ -22,10 +22,10 @@ Prerequisites:
 Clone and build:
 
 ```bash
-git clone https://github.com/Kolzoo/kolz-protocol.git
-cd kolz-protocol
+git clone https://github.com/Kolzoo/cols-protocol.git
+cd cols-protocol
 anchor build
-cargo build --release -p kolz-cli
+cargo build --release -p cols-cli
 cd sdk && yarn install --frozen-lockfile && yarn build
 ```
 

@@ -7,7 +7,7 @@ import { TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync } from "@solana/spl-tok
 import { BorshWriter } from "../borsh";
 import { IX_DISCRIMINATORS } from "../discriminators";
 import { kingOfHillPda, launchPda, nftEscrowVaultPda, petPda } from "../pdas";
-import { KOLZ_PROGRAM_ID, NO_CHAMPION } from "../constants";
+import { COLS_PROGRAM_ID, NO_CHAMPION } from "../constants";
 import { encodeKolName } from "../util";
 
 /**
@@ -51,7 +51,7 @@ export interface TakeThroneArgs {
  *  12. token program                []
  */
 export function buildTakeThroneIx(args: TakeThroneArgs): TransactionInstruction {
-  const programId = args.programId ?? KOLZ_PROGRAM_ID;
+  const programId = args.programId ?? COLS_PROGRAM_ID;
   const champion = args.currentChampion ?? NO_CHAMPION;
   const isFirstCapture = champion.equals(NO_CHAMPION);
 
