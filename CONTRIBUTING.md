@@ -22,7 +22,7 @@ Prerequisites:
 Clone and build:
 
 ```bash
-git clone https://github.com/Kolzoo/cols-protocol.git
+git clone https://github.com/Colszoo/cols-protocol.git
 cd cols-protocol
 anchor build
 cargo build --release -p cols-cli

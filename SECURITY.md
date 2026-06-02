@@ -8,7 +8,7 @@ only when a critical issue is reported.
 ## Reporting a Vulnerability
 
 Please open a private security advisory on the GitHub repository
-at `https://github.com/Kolzoo/cols-protocol`. Use the "Report a vulnerability"
+at `https://github.com/Colszoo/cols-protocol`. Use the "Report a vulnerability"
 button under the Security tab. Do not file public issues for security
 defects.
 

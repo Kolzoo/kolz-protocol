@@ -12,7 +12,7 @@ Runnable, single-file TypeScript scripts that exercise every instruction in the 
 
 COLS is an Anchor program that bonds a KOL identity to a pump.fun launch, mints a 1/1 King of the Hill NFT, lets the largest memecoin holder seize the throne, and distributes pooled fees to holders via keccak256 merkle proofs. The on-chain spec, account layouts, and error codes are documented inline in each example.
 
-Protocol home: https://github.com/Kolzoo/cols-protocol
+Protocol home: https://github.com/Colszoo/cols-protocol
 Oracle and snapshot API: https://cols-api.fly.dev
 
 ## Layout

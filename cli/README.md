@@ -14,7 +14,7 @@ local state inspection, vanity mint grinding, and oracle automation.
 The binary targets Solana mainnet, devnet, and any local validator that
 exposes a standard JSON RPC endpoint. The on-chain program is the `cols`
 Anchor crate published at
-[github.com/Kolzoo/cols-protocol](https://github.com/Kolzoo/cols-protocol).
+[github.com/Colszoo/cols-protocol](https://github.com/Colszoo/cols-protocol).
 Oracle services are operated through the public API at
 [cols-api.fly.dev](https://cols-api.fly.dev).
 

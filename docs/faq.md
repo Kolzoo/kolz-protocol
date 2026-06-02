@@ -88,7 +88,7 @@ Not in v1. The bonding curve observation logic is pump.fun specific.
 
 ### Is there a bug bounty?
 
-Coordination details are in the repository at `https://github.com/Kolzoo/cols-protocol`. See SECURITY.md in the repo root for disclosure process.
+Coordination details are in the repository at `https://github.com/Colszoo/cols-protocol`. See SECURITY.md in the repo root for disclosure process.
 
 ### What is in scope?
 

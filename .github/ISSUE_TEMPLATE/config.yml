@@ -1,11 +1,11 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://github.com/Kolzoo/cols-protocol/tree/main/docs
+    url: https://github.com/Colszoo/cols-protocol/tree/main/docs
     about: Architecture, instructions, deployment, security, throne and distributions deep dives.
   - name: Website
     url: https://cols.fun
     about: Live KOL zoo grid and project landing page.
   - name: Security disclosure
-    url: https://github.com/Kolzoo/cols-protocol/blob/main/SECURITY.md
+    url: https://github.com/Colszoo/cols-protocol/blob/main/SECURITY.md
     about: Responsible disclosure policy for vulnerabilities.

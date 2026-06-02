@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2021"
 description = "Command line interface for the COLS on-chain protocol"
 license = "MIT"
-repository = "https://github.com/Kolzoo/cols-protocol"
-authors = ["Kolzoo <289228263+Kolzoo@users.noreply.github.com>"]
+repository = "https://github.com/Colszoo/cols-protocol"
+authors = ["Colszoo <289228263+Colszoo@users.noreply.github.com>"]
 
 [[bin]]
 name = "cols"

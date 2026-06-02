@@ -131,7 +131,7 @@ try {
 
 ## On-chain program reference
 
-The Anchor program lives at [github.com/Kolzoo/cols-protocol](https://github.com/Kolzoo/cols-protocol). The HTTP indexer used for off-chain reads runs at `https://cols-api.fly.dev`.
+The Anchor program lives at [github.com/Colszoo/cols-protocol](https://github.com/Colszoo/cols-protocol). The HTTP indexer used for off-chain reads runs at `https://cols-api.fly.dev`.
 
 Pinned toolchain versions:
 

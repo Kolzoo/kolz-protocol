@@ -59,4 +59,4 @@ The version scheme is semver across all components. A bump in any component bump
 ## See also
 
 - Root project changelog at `CHANGELOG.md` in the repository root.
-- Release tags at `https://github.com/Kolzoo/cols-protocol/releases`.
+- Release tags at `https://github.com/Colszoo/cols-protocol/releases`.

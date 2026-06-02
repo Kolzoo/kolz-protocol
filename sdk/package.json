@@ -28,17 +28,17 @@
     "sdk"
   ],
   "author": {
-    "name": "Kolzoo",
-    "email": "289228263+Kolzoo@users.noreply.github.com"
+    "name": "Colszoo",
+    "email": "289228263+Colszoo@users.noreply.github.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/Kolzoo/cols-protocol#readme",
+  "homepage": "https://github.com/Colszoo/cols-protocol#readme",
   "bugs": {
-    "url": "https://github.com/Kolzoo/cols-protocol/issues"
+    "url": "https://github.com/Colszoo/cols-protocol/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kolzoo/cols-protocol.git",
+    "url": "git+https://github.com/Colszoo/cols-protocol.git",
     "directory": "sdk"
   },
   "publishConfig": {

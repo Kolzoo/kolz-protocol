@@ -79,7 +79,7 @@ cols config init \
 
 Mainnet deploy uses a multisig-controlled buffer. The recommended flow:
 
-1. Build with `anchor build`, verify SHA-256 of `target/deploy/cols.so` against the release artifact in `https://github.com/Kolzoo/cols-protocol`.
+1. Build with `anchor build`, verify SHA-256 of `target/deploy/cols.so` against the release artifact in `https://github.com/Colszoo/cols-protocol`.
 2. Write the buffer:
 
    ```bash

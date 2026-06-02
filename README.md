@@ -2,23 +2,23 @@
 
 # COLS
 
-<a href="https://github.com/Kolzoo/cols-protocol/blob/main/LICENSE">
+<a href="https://github.com/Colszoo/cols-protocol/blob/main/LICENSE">
   <img src="https://img.shields.io/badge/license-MIT-00ff88?style=for-the-badge" alt="license"/>
 </a>
-<a href="https://github.com/Kolzoo/cols-protocol/actions">
-  <img src="https://img.shields.io/github/actions/workflow/status/Kolzoo/cols-protocol/ci.yml?style=for-the-badge&label=build" alt="build"/>
+<a href="https://github.com/Colszoo/cols-protocol/actions">
+  <img src="https://img.shields.io/github/actions/workflow/status/Colszoo/cols-protocol/ci.yml?style=for-the-badge&label=build" alt="build"/>
 </a>
-<a href="https://github.com/Kolzoo/cols-protocol/releases">
-  <img src="https://img.shields.io/github/v/release/Kolzoo/cols-protocol?include_prereleases&style=for-the-badge" alt="latest release"/>
+<a href="https://github.com/Colszoo/cols-protocol/releases">
+  <img src="https://img.shields.io/github/v/release/Colszoo/cols-protocol?include_prereleases&style=for-the-badge" alt="latest release"/>
 </a>
-<a href="https://github.com/Kolzoo/cols-protocol/commits">
-  <img src="https://img.shields.io/github/last-commit/Kolzoo/cols-protocol?style=for-the-badge" alt="last commit"/>
+<a href="https://github.com/Colszoo/cols-protocol/commits">
+  <img src="https://img.shields.io/github/last-commit/Colszoo/cols-protocol?style=for-the-badge" alt="last commit"/>
 </a>
-<a href="https://github.com/Kolzoo/cols-protocol/issues">
-  <img src="https://img.shields.io/github/issues/Kolzoo/cols-protocol?style=for-the-badge" alt="open issues"/>
+<a href="https://github.com/Colszoo/cols-protocol/issues">
+  <img src="https://img.shields.io/github/issues/Colszoo/cols-protocol?style=for-the-badge" alt="open issues"/>
 </a>
-<a href="https://github.com/Kolzoo/cols-protocol/stargazers">
-  <img src="https://img.shields.io/github/stars/Kolzoo/cols-protocol?style=for-the-badge" alt="stars"/>
+<a href="https://github.com/Colszoo/cols-protocol/stargazers">
+  <img src="https://img.shields.io/github/stars/Colszoo/cols-protocol?style=for-the-badge" alt="stars"/>
 </a>
 <a href="https://cols.fun">
   <img src="https://img.shields.io/badge/website-cols.fun-ff00aa?style=for-the-badge" alt="website"/>
@@ -82,7 +82,7 @@ See [`docs/architecture.md`](docs/architecture.md) for the full system diagram a
 ## Build
 
 ```bash
-git clone https://github.com/Kolzoo/cols-protocol.git
+git clone https://github.com/Colszoo/cols-protocol.git
 cd cols-protocol
 
 # Rust workspace: program + cli
@@ -293,7 +293,7 @@ Support channels: [`.github/SUPPORT.md`](.github/SUPPORT.md).
 
 - Website: [cols.fun](https://cols.fun)
 - X: [@cols_oo](https://x.com/cols_oo)
-- GitHub: [Kolzoo/cols-protocol](https://github.com/Kolzoo/cols-protocol)
+- GitHub: [Colszoo/cols-protocol](https://github.com/Colszoo/cols-protocol)
 - Ticker: `$COLS`
 - Documentation: [`docs/`](docs/)
 
