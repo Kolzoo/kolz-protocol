@@ -40,20 +40,23 @@ and every trade fee feeds a vault that drops to `$KOLZ` holders on a keccak merk
 
 ## Features
 
+Status legend: `mainnet` = deployed + verified onchain · `devnet` = deployed + tested on devnet · `implemented` = code complete, awaiting mainnet deploy · `tested` = unit/integration coverage in CI
+
 | Feature | Status |
 | --- | --- |
-| WebSocket KOL purchase detection (`$KOLZ` SPL transfers) | stable |
-| pump.fun token auto-launch via PumpPortal Lightning | stable |
-| Vanity mint grinding (`...pump` suffix) | stable |
-| Anchor program: `oracle_bind_pumpfun_launch` | stable |
-| Anchor program: `mint_kol_nft` (1/1 escrow + Metaplex V3 metadata) | stable |
-| Anchor program: `take_throne` (delegate-based NFT seize) | stable |
-| Anchor program: `settle_throne` (7-day permanent transfer) | stable |
-| Holder snapshot daemon + merkle distribution builder | stable |
-| Anchor program: `claim_holder_fees` (keccak merkle proof verification) | stable |
-| TypeScript SDK (`@kolz/sdk`) wrapping every instruction | stable |
-| Rust CLI (`kolz`) for ops, devnet inspection, vanity grinding | stable |
-| Devnet end-to-end test suite | stable |
+| WebSocket KOL purchase detection (`$KOLZ` SPL transfers) | implemented |
+| pump.fun token auto-launch via PumpPortal Lightning | implemented |
+| Vanity mint grinding (`...pump` suffix) | implemented |
+| Anchor program: `oracle_bind_pumpfun_launch` | devnet |
+| Anchor program: `mint_kol_nft` (1/1 escrow + Metaplex V3 metadata) | devnet |
+| Anchor program: `take_throne` (delegate-based NFT seize) | devnet |
+| Anchor program: `settle_throne` (7-day permanent transfer) | devnet |
+| Holder snapshot daemon + merkle distribution builder | implemented |
+| Anchor program: `claim_holder_fees` (keccak merkle proof verification) | devnet |
+| TypeScript SDK (in `sdk/`, importable from source) | implemented |
+| Rust CLI (`kolz`) for ops, devnet inspection, vanity grinding | implemented |
+| Devnet end-to-end test suite | tested |
+| Mainnet program deploy | pending |
 
 ## Architecture
 
@@ -98,8 +101,12 @@ yarn ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts
 
 ## Quick start
 
+The SDK is consumed from source until the npm publish lands. After running `cd sdk && yarn && yarn build`, import via a path / workspace dependency. The examples below show the published path that will be available after the npm publish.
+
 ```typescript
 import { Connection, Keypair, sendAndConfirmTransaction, Transaction } from '@solana/web3.js';
+// From source (current): import { KolzClient } from '../sdk/dist';
+// From npm (after publish): import { KolzClient } from '@kolz/sdk';
 import { KolzClient } from '@kolz/sdk';
 
 const conn   = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');

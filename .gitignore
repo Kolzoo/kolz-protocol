@@ -49,3 +49,4 @@ coverage/
 # Deployment
 .vercel/
 .fly/
+scripts/
