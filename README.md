@@ -292,7 +292,7 @@ Support channels: [`.github/SUPPORT.md`](.github/SUPPORT.md).
 ## Links
 
 - Website: [cols.fun](https://cols.fun)
-- X: [@cols_oo](https://x.com/cols_oo)
+- X: [@Colsfun](https://x.com/Colsfun)
 - GitHub: [Colszoo/cols-protocol](https://github.com/Colszoo/cols-protocol)
 - Ticker: `$COLS`
 - Documentation: [`docs/`](docs/)
