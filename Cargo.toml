@@ -16,7 +16,7 @@ keywords = ["solana", "anchor", "pump-fun", "memecoin", "defi"]
 categories = ["cryptography", "network-programming"]
 
 [workspace.dependencies]
-anchor-lang = "0.30.1"
+anchor-lang = "1.1.2"
 anchor-spl = "0.30.1"
 solana-program = "=1.18.26"
 solana-sdk = "=1.18.26"
